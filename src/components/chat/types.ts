@@ -26,4 +26,5 @@ export interface ChatMessageEvent {
     [emoteid: string]: string[];
   };
   type: string | undefined;
+  id: string;
 }

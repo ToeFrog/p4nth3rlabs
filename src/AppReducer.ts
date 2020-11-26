@@ -1,6 +1,6 @@
 import type { AppState } from './AppContext';
 import type { ChatMessageEvent } from './components/chat/types';
-
+// import { ChatMessageQueueMaxMessageCount } from './components/chat';
 export interface AppAction {
   type: 'addChatMessage' | 'addAlert';
   chatMessage: ChatMessageEvent;
@@ -11,6 +11,8 @@ export default function AppReducer(state: AppState, action: AppAction) {
 
   switch (action.type) {
     case 'addChatMessage':
+      console.log('running');
+      
       newState.chatMessages.push(action.chatMessage);
 
       return { ...newState };

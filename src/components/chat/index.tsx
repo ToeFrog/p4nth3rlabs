@@ -14,7 +14,7 @@ export default function ChatMessageQueue() {
     <>
       <MessageQueue>
         {chatMessages.map((message: ChatMessageEvent) => (
-          <Message message={message} />
+          <Message key={message.id} message={message} />
         ))}
       </MessageQueue>
     </>

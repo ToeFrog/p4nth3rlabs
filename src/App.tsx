@@ -1,12 +1,10 @@
-import { useState, useReducer, useEffect, Dispatch } from 'react';
+import { useReducer, useEffect, Dispatch } from 'react';
 import Socket from './socket';
 import AppContext, { AppState } from './AppContext';
 import AppReducer from './AppReducer';
 import MessageQueue from './components/chat';
 import { GlobalStyle } from './styles';
 import { MainframeEvent, WebsocketEvent } from './types';
-
-// import { ChatMessageQueueMaxMessageCount } from './components/chat';
 
 interface AppProps {
   uri: string | undefined;
