@@ -1,9 +1,10 @@
+import { ChatMessageEvent } from './components/chat/types';
 export interface SocketOptions {
   reconnect: boolean;
 }
 
 // eslint-disable-next-line no-shadow
-export enum MainframeEvents {
+export enum MainframeEvent {
   sub = 'sub',
   giftsub = 'giftsub',
   raid = 'raid',
@@ -12,6 +13,12 @@ export enum MainframeEvents {
   teammemberjoin = 'teammember',
   chatmessage = 'chatmessage',
   follow = 'follow',
+}
+export interface WebsocketEvent {
+  broadcaster: string;
+  event: MainframeEvent;
+  id: string;
+  data: ChatMessageEvent;
 }
 
 // eslint-disable-next-line no-unused-vars

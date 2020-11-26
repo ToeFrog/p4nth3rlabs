@@ -15,20 +15,11 @@ interface MessageProps {
 
 export default function Message(props: MessageProps) {
   const { message } = props;
-  const {
-    displayName,
-    logoUrl,
-    isMod,
-    isVip,
-    isSubscriber,
-    isBroadcaster,
-    isTeamMember,
-    type,
-  } = message;
+  const { displayName, logoUrl, isMod, isVip, isSubscriber, isBroadcaster, isTeamMember } = message;
 
   const processedChat = processChat(message);
-  const action: boolean = type === 'action';
   const startsWithTag = processedChat.message.startsWith('<span class="tag">');
+  const isAction: boolean = processedChat.type === 'action';
 
   return (
     <ChatMessage
@@ -41,17 +32,20 @@ export default function Message(props: MessageProps) {
       <AvatarContainer backgroundImage={logoUrl} />
       <MessageContainer>
         <DisplayName
+          className="background-clip-text-hack"
           isSubscriber={isSubscriber}
           isBroadcaster={isBroadcaster}
           isVip={isVip}
           isMod={isMod}
           isTeamMember={isTeamMember}
         >
-          {displayName}
+          @{displayName}
         </DisplayName>
-        <MessageText action={action} startsWithTag={startsWithTag}>
-          {processedChat.message}
-        </MessageText>
+        <MessageText
+          isAction={isAction}
+          startsWithTag={startsWithTag}
+          dangerouslySetInnerHTML={{ __html: processedChat.message }}
+        ></MessageText>
       </MessageContainer>
     </ChatMessage>
   );

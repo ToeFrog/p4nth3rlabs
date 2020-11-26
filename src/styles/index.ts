@@ -56,6 +56,24 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     font-weight: var(--font-weight-normal);
   }
+
+  .background-clip-text-hack {
+    -webkit-background-clip: text;
+  }
+
+  .tag {
+    color: var(--yellow);
+    padding-left: 4px;
+    padding-right: 4px;
+  }
+  
+  .emote {
+    display: inline-block;
+    position: relative;
+    top: 2px;
+    margin-left: -4px;
+    margin-right: -4px;
+  }
 `;
 
 export { GlobalStyle };

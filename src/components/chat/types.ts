@@ -27,5 +27,3 @@ export interface ChatMessageEvent {
   };
   type: string | undefined;
 }
-
-export const MAX_MESSAGE_COUNT = 7;

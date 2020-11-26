@@ -1,18 +1,19 @@
+import { useContext } from 'react';
+import AppContext from '../../AppContext';
 import Message from './message';
 import { MessageQueue } from './index.style';
 import { ChatMessageEvent } from './types';
 
-interface ChatMessageQueueProps {
-  messages: ChatMessageEvent[];
-}
+export const ChatMessageQueueMaxMessageCount = 7;
 
-export default function ChatMessageQueue(props: ChatMessageQueueProps) {
-  const { messages } = props;
+export default function ChatMessageQueue() {
+  const { state } = useContext(AppContext);
+  const { chatMessages } = state;
 
   return (
     <>
       <MessageQueue>
-        {messages.map((message: ChatMessageEvent) => (
+        {chatMessages.map((message: ChatMessageEvent) => (
           <Message message={message} />
         ))}
       </MessageQueue>

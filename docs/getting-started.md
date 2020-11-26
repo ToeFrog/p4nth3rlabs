@@ -13,7 +13,11 @@ In a terminal tab, run:
 
 ```
 cd path/to/repo
-npm install OR yarn install
+npm install 
+
+OR 
+
+yarn install
 ```
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
@@ -32,11 +36,11 @@ In a terminal tab, run:
 
 ```
 cd path/to/repo
-npm run dev
+npm run start
 
 OR
 
-yarn dev
+yarn start
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.

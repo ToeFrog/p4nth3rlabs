@@ -9,7 +9,7 @@ interface ChatMessageProps {
 }
 
 interface MessageTextProps {
-  action: boolean;
+  isAction: boolean;
   startsWithTag: boolean;
 }
 
@@ -58,32 +58,19 @@ const renderBroadcasterAfter = css`
 `;
 
 const vipBorderImage = css`
-  border-image-source: linear-gradient(
-    90deg,
-    var(--yellow) 0%,
-    var(--vip) 100%
-  );
+  border-image-source: linear-gradient(90deg, var(--yellow) 0%, var(--vip) 100%);
 `;
 
 const modBorderImage = css`
-  border-image-source: linear-gradient(
-    90deg,
-    var(--yellow) 0%,
-    var(--mod) 100%
-  );
+  border-image-source: linear-gradient(90deg, var(--yellow) 0%, var(--mod) 100%);
 `;
 
 const broadcasterBorderImage = css`
-  border-image-source: linear-gradient(
-    90deg,
-    var(--yellow) 0%,
-    var(--broadcaster) 100%
-  );
+  border-image-source: linear-gradient(90deg, var(--yellow) 0%, var(--broadcaster) 100%);
 `;
 
 const ChatMessage = styled.div<ChatMessageProps>`
-  animation: ${slideInLeft} 0.3s ease forwards,
-    ${slideOutLeft} 0.5s ease 10000ms forwards;
+  // animation: ${slideInLeft} 0.3s ease forwards, ${slideOutLeft} 0.5s ease 10000ms forwards;
   background-color: var(--black);
   display: flex;
   flex-direction: row;
@@ -91,11 +78,7 @@ const ChatMessage = styled.div<ChatMessageProps>`
   margin-bottom: 0.5rem;
   border-top: 6px solid;
   border-image-slice: 1;
-  border-image-source: linear-gradient(
-    90deg,
-    var(--yellow) 0%,
-    var(--yellow) 100%
-  );
+  border-image-source: linear-gradient(90deg, var(--yellow) 0%, var(--yellow) 100%);
   box-shadow: 0rem 0.6rem 1rem -0.4rem var(--black);
   border-bottom-right-radius: 0.25rem;
   position: relative;
@@ -129,7 +112,6 @@ const DisplayName = styled.p<ChatMessageProps>`
   margin-bottom: 1rem;
   color: var(--yellow);
   font-weight: var(--font-weight-bold);
-  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 
@@ -156,7 +138,7 @@ const MessageText = styled.div<MessageTextProps>`
   font-weight: var(--font-weight-normal);
   width: 100%;
 
-  ${(props) => (props.action ? MessageActionStyles : '')}
+  ${(props) => (props.isAction ? MessageActionStyles : '')}
   ${(props) => (props.startsWithTag ? StartswithTagStyles : '')}
 `;
 
@@ -166,8 +148,8 @@ const AvatarContainer = styled.div<AvatarContainerProps>`
   background-size: cover;
   flex: 0 0 100px;
   background-position-y: 50%;
+  background-image: ${(props) => `url(${props.backgroundImage})`};
   background-color: var(--black);
-  background-image: ${(props) => props.backgroundImage};
 `;
 
 const MessageContainer = styled.div`
@@ -175,25 +157,4 @@ const MessageContainer = styled.div`
   width: 100%;
 `;
 
-export {
-  ChatMessage,
-  DisplayName,
-  MessageText,
-  AvatarContainer,
-  MessageContainer,
-};
-
-// look up how to style stuff with classes
-// :global(.tag) {
-//   color: var(--yellow);
-//   padding-left: 4px;
-//   padding-right: 4px;
-// }
-
-// :global(.emote) {
-//   display: inline-block;
-//   position: relative;
-//   top: 2px;
-//   margin-left: -4px;
-//   margin-right: -4px;
-// }
+export { ChatMessage, DisplayName, MessageText, AvatarContainer, MessageContainer };

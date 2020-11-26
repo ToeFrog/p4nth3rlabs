@@ -1,40 +1,53 @@
-import React, { useState } from 'react';
+import { useState, useReducer, useEffect, Dispatch } from 'react';
 import Socket from './socket';
+import AppContext, { AppState } from './AppContext';
+import AppReducer from './AppReducer';
 import MessageQueue from './components/chat';
 import { GlobalStyle } from './styles';
-import { MainframeEvents } from './types';
-import type { ChatMessageEvent } from './components/chat/types';
+import { MainframeEvent, WebsocketEvent } from './types';
+
+// import { ChatMessageQueueMaxMessageCount } from './components/chat';
 
 interface AppProps {
   uri: string | undefined;
 }
 
+async function listenForChatMessages(socket: any, dispatch: Dispatch<any>) {
+  socket.on(MainframeEvent.chatmessage, async (event: WebsocketEvent) => {
+    dispatch({
+      type: 'addChatMessage',
+      chatMessage: event.data,
+    });
+  });
+}
+
 function App(props: AppProps) {
-  console.log('here');
-
-  const [messages, setMessages] = useState([]);
-
   const { uri } = props;
 
-  console.log(uri);
+  useEffect(() => {
+    if (uri && uri.length > 0) {
+      const socket = new Socket(uri, {
+        reconnect: true,
+      });
 
-  if (uri && uri.length > 0) {
-    console.log('CONNECTED');
+      listenForChatMessages(socket, dispatch);
+    }
+    return () => {
+      // cleanup
+    };
+  }, [uri]);
 
-    const socket = new Socket(uri, {
-      reconnect: true,
-    });
+  const initialState: AppState = {
+    chatMessages: [],
+  };
 
-    socket.on(MainframeEvents.chatmessage, async (data) => {
-      console.log(data);
-    });
-  }
+  const [state, dispatch] = useReducer(AppReducer, initialState);
 
   return (
-    <>
+    <AppContext.Provider value={{ state, dispatch }}>
       <GlobalStyle />
-      <MessageQueue messages={messages}></MessageQueue>
-    </>
+      <MessageQueue></MessageQueue>
+    </AppContext.Provider>
   );
 }
 
