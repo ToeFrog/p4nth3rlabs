@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Socket from './socket';
 import MessageQueue from './components/chat';
+import { GlobalStyle } from './styles';
 import { MainframeEvents } from './types';
 import type { ChatMessageEvent } from './components/chat/types';
 
@@ -29,7 +30,12 @@ function App(props: AppProps) {
     });
   }
 
-  return <MessageQueue messages={messages}></MessageQueue>;
+  return (
+    <>
+      <GlobalStyle />
+      <MessageQueue messages={messages}></MessageQueue>
+    </>
+  );
 }
 
 export default App;
