@@ -1,48 +1,30 @@
-export enum Alerts {
+export enum AlertNames {
   Follow = 'follow',
-  ChatMessage = 'chatmessage',
-  Cheer = 'cheer',
-  Sub = 'sub',
-  GiftSub = 'giftsub',
 }
 
-export interface FollowAlert {
-  type: 'follow';
-  alertData: {
+export interface AlertQueueEvent {
+  type: string,
+  data: { [key: string]: string }
+}
+
+export interface FollowAlert extends AlertQueueEvent {
+  type: AlertNames.Follow;
+  data: {
     followerUserId: string;
     logoUrl: string;
     followerName: string;
   };
 }
 
-export interface HostAlert {
-  type: 'host';
-  alertData: {
-    viewerCount: number;
-    hosterName: string;
-    logoUrl: string;
-  };
-}
+// export interface SubAlert {
+//   type: AlertNames.Sub;
+//   data: {
+//     logoUrl: string;
+//     subscriberUsername: string;
+//     subTier: string;
+//     message: string;
+//     months: number;
+//   };
+// }
 
-export interface GiftSubAlert {
-  type: 'giftsub';
-  alertData: {
-    logoUrl: string;
-    subscriberUsername: string;
-    gifterUsername: string;
-    subTier: string;
-  };
-}
-
-export interface SubAlert {
-  type: 'sub';
-  alertData: {
-    logoUrl: string;
-    subscriberUsername: string;
-    subTier: string;
-    message: string;
-    months: number;
-  };
-}
-
-export type AlertQueueEvent = FollowAlert | HostAlert | SubAlert | GiftSubAlert;
+// export type AlertQueueEvent = FollowAlert;

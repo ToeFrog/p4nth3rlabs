@@ -1,42 +1,18 @@
-// Taken from p4nth3rball!
-// Create a queue that waits `delay` milliseconds
-// before handling the next item
-export default function AlertQueue(delay = 0) {
-  // This is where we'll track items to work on
-  let locked = false;
-  const items: (() => void)[] = [];
+import { Dispatch, useContext, useEffect, useState } from 'react';
+import AppContext from './AppContext';
+import { AlertQueueEvent } from './components/alerts/types';
 
-  const setLockTimer = () => {
-    locked = true; // immediately locks queue
-    setTimeout((_) => {
-      locked = false; // unlocks when complete
-      // eslint-disable-next-line no-use-before-define
-      attempt(); // attempts to run again when available
-    }, delay);
-  };
+export function useAlertQueue(dispatch: Dispatch<any>): AlertQueueEvent | null {
+  const ctx = useContext(AppContext);
+  const [currentAlert, setCurrentAlert] = useState<AlertQueueEvent | null>(null);
 
-  // We'll call this whenever we want to run
-  // the first item in our queue
-  const attempt = () => {
-    if (items.length > 0 && locked === false) {
-      setLockTimer();
-      const fn = items.shift();
-
-      if (fn) {
-        fn();
-      }
+  useEffect(() => {
+    if (ctx.state.alerts.length === 0) setCurrentAlert(null);
+    else if (currentAlert !== ctx.state.alerts[0]) {
+      setCurrentAlert(ctx.state.alerts[0]);
+      setTimeout(() => dispatch({ type: 'alert_complete' }), 3000);
     }
-  };
+  }, [ctx, dispatch, currentAlert]);
 
-  return {
-    push(fn: () => void) {
-      // prevent bad times with a helpful message
-      if (typeof fn !== 'function') {
-        throw new Error('Must pass "queue.push" a function!');
-      }
-
-      items.push(fn); // add work to the queue
-      attempt(); // immediately attempt to run it
-    },
-  };
+  return currentAlert;
 }

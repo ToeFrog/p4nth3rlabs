@@ -2,6 +2,8 @@ import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
   :root {
+    --cb-animation: cubic-bezier(.51,.56,.11,1.03);
+    --alert-display-time: 2900ms;
     --red: #f11012;
     --red-darker: #d90d10;
     --green: #82af3a;
@@ -73,6 +75,28 @@ const GlobalStyle = createGlobalStyle`
     top: 2px;
     margin-left: -4px;
     margin-right: -4px;
+  }
+
+  .alert__subtitle {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    font-family: var(--font-family-heading);
+    text-transform: uppercase;
+    font-size: 4rem;
+    fill: var(--black);
+  }
+  
+  .alert__bannerImage {
+    width: 100%;
+    margin-top: 262px;
+  }
+
+  .alert__bannerTextPath {
+    overflow: visible;
+    position: relative;
+    bottom: 192px;
+    width: 100%;
   }
 `;
 

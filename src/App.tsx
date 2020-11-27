@@ -1,10 +1,11 @@
-import React, { useReducer, useEffect, Dispatch } from 'react';
+import React, { useReducer, useEffect } from 'react';
 import Socket from './socket';
 import AppContext, { AppState } from './AppContext';
 import AppReducer from './AppReducer';
 import MessageQueue from './components/chat';
+import Alerts from './components/alerts';
 import { GlobalStyle } from './styles';
-import { MainframeEvent, WebsocketEvent } from './types';
+import { MainframeEvent, ChatWebsocketEvent, AlertWebsocketEvent } from './types';
 
 interface AppProps {
   uri: string | undefined;
@@ -20,19 +21,24 @@ function App(props: AppProps) {
         reconnect: true,
       });
 
-      socket.on(MainframeEvent.chatmessage, (event: WebsocketEvent) => {
+      socket.on(MainframeEvent.chatmessage, (event: ChatWebsocketEvent) => {
         dispatch({
           type: 'addChatMessage',
           data: event.data,
         });
       });
 
-      socket.on(MainframeEvent.follow, (event: WebsocketEvent) => {
-        console.log(event.data);
+      socket.on(MainframeEvent.follow, (event: AlertWebsocketEvent) => {
+        console.log('FOLLOW RECEIVED');
+
+        const dataToPass: any = {
+          type: 'follow',
+          data: event.data,
+        };
 
         dispatch({
           type: 'follow',
-          data: event.data,
+          data: dataToPass,
         });
       });
     }
@@ -54,7 +60,8 @@ function App(props: AppProps) {
   return (
     <AppContext.Provider value={{ state, dispatch }}>
       <GlobalStyle />
-      <MessageQueue></MessageQueue>
+      <MessageQueue />
+      <Alerts dispatch={dispatch} />
     </AppContext.Provider>
   );
 }

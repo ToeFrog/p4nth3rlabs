@@ -1,4 +1,5 @@
 import { ChatMessageEvent } from './components/chat/types';
+import { AlertQueueEvent } from './components/alerts/types';
 export interface SocketOptions {
   reconnect: boolean;
 }
@@ -14,11 +15,18 @@ export enum MainframeEvent {
   chatmessage = 'chatmessage',
   follow = 'follow',
 }
-export interface WebsocketEvent {
+export interface ChatWebsocketEvent {
   broadcaster: string;
   event: MainframeEvent;
   id: string;
   data: ChatMessageEvent;
+}
+
+export interface AlertWebsocketEvent {
+  broadcaster: string;
+  event: MainframeEvent;
+  id: string;
+  data: AlertQueueEvent;
 }
 
 // eslint-disable-next-line no-unused-vars
