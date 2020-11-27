@@ -10,6 +10,7 @@ import BannerImage from './svg/bannerImage';
 import BannerTextPath from './svg/bannerTextPath';
 import { AlertNames } from './types';
 import { useAlertQueue } from '../../AlertQueue';
+import { debugAlert } from './debug'
 
 interface AlertProps {
   dispatch: Dispatch<any>;
@@ -46,14 +47,6 @@ function getBannerText(alert: any): any {
         imgAlt: alert.data.subscriberUsername,
         logoUrl: alert.data.logoUrl,
       };
-    case 'debug':
-      return {
-        banner: 'New sub!',
-        footer: 'Madhouse steve just subscribed!',
-        imgAlt: 'whitep4nth3r',
-        logoUrl:
-          'https://static-cdn.jtvnw.net/jtv_user_pictures/69ade2a2-82e1-477c-afc6-43582bf2844c-profile_image-300x300.png',
-      };
     default:
       return {
         banner: 'default',
@@ -66,27 +59,26 @@ function getBannerText(alert: any): any {
 
 export default function Alert(props: AlertProps) {
   const debug = false;
-  let debugAlert = {
-    type: 'debug',
-    id: Date.now()
-  };
-
-  const alert = useAlertQueue(props.dispatch);
-  if (!alert && !debug) return null;
-  let displayText = debug ? getBannerText(debugAlert) : getBannerText(alert);
+  let alert = useAlertQueue(props.dispatch);
+  if (debug) alert = debugAlert;
+  if (!alert) return null;
+  const displayText = debug ? getBannerText(debugAlert) : getBannerText(alert);
 
   return (
-    <AlertContainer key={alert!.id}>
-      <AlertBanner>
-        <BannerImage />
-        <BannerTextPath displayText={displayText.banner} />
-      </AlertBanner>
-
-      <AlertLogo src={displayText.logoUrl} alt={displayText.imgAlt} />
-
-      <AlertNameContainer>
-        <AlertName>{displayText.footer}</AlertName>
-      </AlertNameContainer>
-    </AlertContainer>
+      <AlertContainer key={alert.id}>
+        <audio autoPlay>
+          <source src={`./audio/${alert.type}.mp3`} type="audio/mp3" />
+        </audio>
+        <AlertBanner>
+          <BannerImage />
+          <BannerTextPath displayText={displayText.banner} />
+        </AlertBanner>
+        
+        <AlertLogo src={displayText.logoUrl} alt={displayText.imgAlt} />
+        
+        <AlertNameContainer>
+          <AlertName>{displayText.footer}</AlertName>
+        </AlertNameContainer>
+      </AlertContainer>
   );
 }
