@@ -1,6 +1,7 @@
 export enum AlertNames {
   Follow = 'follow',
   Raid = 'raid',
+  Cheer = 'cheer',
 }
 
 export interface AlertQueueEvent {
@@ -24,6 +25,15 @@ export interface FollowAlert extends AlertQueueEvent {
     followerUserId: string;
     logoUrl: string;
     followerName: string;
+  };
+}
+
+export interface CheerAlert extends AlertQueueEvent {
+  type: AlertNames.Cheer;
+  data: {
+    cheererName: string;
+    logoUrl: string;
+    bitCount: number;
   };
 }
 

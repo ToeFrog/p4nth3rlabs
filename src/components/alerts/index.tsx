@@ -31,13 +31,13 @@ function getBannerText(alert: any): any {
         imgAlt: alert.data.raider,
         logoUrl: alert.data.logoUrl,
       };
-    // case AlertNames.Cheer:
-    //   return {
-    //     banner: `Bits! Cheers!`,
-    //     footer: `${data.alert.data.bitCount} bits from ${data.alert.data.cheererName}!`,
-    //     imgAlt: data.alert.data.cheererName,
-    //     logoUrl: data.alert.data.logoUrl,
-    //   };
+    case AlertNames.Cheer:
+      return {
+        banner: `Bits! Cheers!`,
+        footer: `${alert.data.bitCount} bit${alert.data.bitCount > 1?'s':''} from ${alert.data.cheererName}!`,
+        imgAlt: alert.data.cheererName,
+        logoUrl: alert.data.logoUrl,
+      };
     // case AlertNames.Sub:
     //   return {
     //     banner: `New sub!`,

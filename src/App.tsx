@@ -30,26 +30,39 @@ function App(props: AppProps) {
 
       socket.on(MainframeEvent.raid, (event: AlertWebsocketEvent) => {
         const dataToPass: any = {
-          type: 'raid',
+          type: MainframeEvent.raid,
           id: event.id,
           data: event.data,
         };
 
         dispatch({
-          type: 'raid',
+          type: MainframeEvent.raid,
+          data: dataToPass,
+        });
+      });
+
+      socket.on(MainframeEvent.cheer, (event: AlertWebsocketEvent) => {
+        const dataToPass: any = {
+          type: MainframeEvent.cheer,
+          id: event.id,
+          data: event.data,
+        };
+
+        dispatch({
+          type: MainframeEvent.cheer,
           data: dataToPass,
         });
       });
 
       socket.on(MainframeEvent.follow, (event: AlertWebsocketEvent) => {
         const dataToPass: any = {
-          type: 'follow',
+          type: MainframeEvent.follow,
           id: event.id,
           data: event.data,
         };
 
         dispatch({
-          type: 'follow',
+          type: MainframeEvent.follow,
           data: dataToPass,
         });
       });

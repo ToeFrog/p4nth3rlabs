@@ -2,6 +2,7 @@ import type { AppState } from './AppContext';
 import type { ChatMessageEvent } from './components/chat/types';
 import type { AlertQueueEvent } from './components/alerts/types';
 import { MaxMessageCount } from './components/chat';
+import { MainframeEvent } from './types';
 interface AppAction {
   type: string;
   data: AlertQueueEvent | ChatMessageEvent;
@@ -19,8 +20,9 @@ export default function AppReducer(state: AppState, action: AppAction) {
       }
 
       return { ...newState };
-    case 'follow':
-    case 'raid':
+    case MainframeEvent.follow:
+    case MainframeEvent.raid:
+    case MainframeEvent.cheer:
       if (!newState.alerts.some((alert) => alert.data.id === action.data.id)) {
         newState.alerts.push(action.data as AlertQueueEvent);
       }
