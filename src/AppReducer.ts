@@ -23,6 +23,7 @@ export default function AppReducer(state: AppState, action: AppAction) {
     case MainframeEvent.follow:
     case MainframeEvent.raid:
     case MainframeEvent.cheer:
+    case MainframeEvent.sub:
       if (!newState.alerts.some((alert) => alert.data.id === action.data.id)) {
         newState.alerts.push(action.data as AlertQueueEvent);
       }

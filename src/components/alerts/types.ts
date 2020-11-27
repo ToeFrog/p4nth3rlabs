@@ -2,6 +2,7 @@ export enum AlertNames {
   Follow = 'follow',
   Raid = 'raid',
   Cheer = 'cheer',
+  Sub = 'sub',
 }
 
 export interface AlertQueueEvent {
@@ -37,15 +38,13 @@ export interface CheerAlert extends AlertQueueEvent {
   };
 }
 
-// export interface SubAlert {
-//   type: AlertNames.Sub;
-//   data: {
-//     logoUrl: string;
-//     subscriberUsername: string;
-//     subTier: string;
-//     message: string;
-//     months: number;
-//   };
-// }
-
-// export type AlertQueueEvent = FollowAlert;
+export interface SubAlert {
+  type: AlertNames.Sub;
+  data: {
+    logoUrl: string;
+    subscriberUsername: string;
+    subTier: string;
+    message: string;
+    months: number;
+  };
+}

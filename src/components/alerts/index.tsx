@@ -38,13 +38,14 @@ function getBannerText(alert: any): any {
         imgAlt: alert.data.cheererName,
         logoUrl: alert.data.logoUrl,
       };
-    // case AlertNames.Sub:
-    //   return {
-    //     banner: `New sub!`,
-    //     footer: `..........`,
-    //     imgAlt: '.......',
-    //     logoUrl: data.alert.data.logoUrl,
-    //   };
+    case AlertNames.Sub:
+      let tierText = (alert.data.subTier === 'Prime') ? 'with Twitch Prime' : `at Tier ${alert.data.subTier}`;
+      return {
+        banner: alert.data.months > 0 ? `Resub!` : `New sub!`,
+        footer: `${alert.data.subscriberUsername} has ${alert.data.months > 0 ? 're' : ''}subscribed ${tierText}!`,
+        imgAlt: alert.data.subscriberUsername,
+        logoUrl: alert.data.logoUrl,
+      };
     case 'debug':
       return {
         banner: 'New sub!',

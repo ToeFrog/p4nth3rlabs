@@ -41,6 +41,19 @@ function App(props: AppProps) {
         });
       });
 
+      socket.on(MainframeEvent.sub, (event: AlertWebsocketEvent) => {
+        const dataToPass: any = {
+          type: MainframeEvent.sub,
+          id: event.id,
+          data: event.data,
+        };
+
+        dispatch({
+          type: MainframeEvent.sub,
+          data: dataToPass,
+        });
+      });
+
       socket.on(MainframeEvent.cheer, (event: AlertWebsocketEvent) => {
         const dataToPass: any = {
           type: MainframeEvent.cheer,
