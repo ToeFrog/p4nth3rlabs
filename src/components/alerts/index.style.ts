@@ -121,7 +121,7 @@ const AlertLogo = styled.img`
   display: flex;
   left: 0;
   right: 0;
-  top: 60px;
+  top: 160px;
   position: absolute;
   z-index: 1;
   border-radius: 50%;

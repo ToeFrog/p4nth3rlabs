@@ -40,50 +40,34 @@ function getBannerText(alert: any): any {
     //   };
     case 'debug':
       return {
-        banner: 'whitep4nth3r',
-        footer: 'eeeeeee',
+        banner: 'New sub!',
+        footer: 'Madhouse steve just subscribed!',
         imgAlt: 'whitep4nth3r',
         logoUrl:
           'https://static-cdn.jtvnw.net/jtv_user_pictures/69ade2a2-82e1-477c-afc6-43582bf2844c-profile_image-300x300.png',
       };
     default:
       return {
-        banner: 'whitep4nth3r',
-        footer: 'eeeeeee',
-        imgAlt: 'whitep4nth3r',
-        logoUrl:
-          'https://static-cdn.jtvnw.net/jtv_user_pictures/69ade2a2-82e1-477c-afc6-43582bf2844c-profile_image-300x300.png',
+        banner: 'default',
+        footer: 'default',
+        imgAlt: 'default',
+        logoUrl: 'default',
       };
   }
 }
 
 export default function Alert(props: AlertProps) {
-  const alert = useAlertQueue(props.dispatch);
-  if (!alert) return null;
-  let displayText = getBannerText(alert);
-
   const debug = false;
   let debugAlert = {
     type: 'debug',
   };
-  let debugText = getBannerText(debugAlert);
+
+  const alert = useAlertQueue(props.dispatch);
+  if (!alert && !debug) return null;
+  let displayText = debug ? getBannerText(debugAlert) : getBannerText(alert);
 
   return (
     <>
-      {debug && (
-        <AlertContainer>
-          <AlertBanner>
-            <BannerImage />
-            <BannerTextPath displayText={debugText.banner} />
-          </AlertBanner>
-
-          <AlertLogo src={debugText.logoUrl} alt={debugText.imgAlt} />
-
-          <AlertNameContainer>
-            <AlertName>{debugText.footer}</AlertName>
-          </AlertNameContainer>
-        </AlertContainer>
-      )}
       <AlertContainer>
         <AlertBanner>
           <BannerImage />

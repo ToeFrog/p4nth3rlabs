@@ -89,7 +89,7 @@ const GlobalStyle = createGlobalStyle`
   
   .alert__bannerImage {
     width: 100%;
-    margin-top: 262px;
+    margin-top: 366px;
   }
 
   .alert__bannerTextPath {
