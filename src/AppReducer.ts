@@ -20,7 +20,10 @@ export default function AppReducer(state: AppState, action: AppAction) {
 
       return { ...newState };
     case 'follow':
-      newState.alerts.push(action.data as AlertQueueEvent);
+    case 'raid':
+      if (!newState.alerts.some((alert) => alert.data.id === action.data.id)) {
+        newState.alerts.push(action.data as AlertQueueEvent);
+      }
       return { ...newState };
     case 'alert_complete':
       newState.alerts.shift();

@@ -24,6 +24,13 @@ function getBannerText(alert: any): any {
         imgAlt: alert.data.followerName,
         logoUrl: alert.data.logoUrl,
       };
+    case AlertNames.Raid:
+      return {
+        banner: "It's a raid!",
+        footer: `${alert.data.raider} is raiding with ${alert.data.raiderCount} viewers!`,
+        imgAlt: alert.data.raider,
+        logoUrl: alert.data.logoUrl,
+      };
     // case AlertNames.Cheer:
     //   return {
     //     banner: `Bits! Cheers!`,

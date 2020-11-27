@@ -7,7 +7,6 @@ export interface SocketOptions {
 // eslint-disable-next-line no-shadow
 export enum MainframeEvent {
   sub = 'sub',
-  giftsub = 'giftsub',
   raid = 'raid',
   cheer = 'cheer',
   specialuserjoin = 'specialuserjoin',

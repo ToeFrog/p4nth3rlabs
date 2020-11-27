@@ -28,11 +28,23 @@ function App(props: AppProps) {
         });
       });
 
-      socket.on(MainframeEvent.follow, (event: AlertWebsocketEvent) => {
-        console.log('FOLLOW RECEIVED');
+      socket.on(MainframeEvent.raid, (event: AlertWebsocketEvent) => {
+        const dataToPass: any = {
+          type: 'raid',
+          id: event.id,
+          data: event.data,
+        };
 
+        dispatch({
+          type: 'raid',
+          data: dataToPass,
+        });
+      });
+
+      socket.on(MainframeEvent.follow, (event: AlertWebsocketEvent) => {
         const dataToPass: any = {
           type: 'follow',
+          id: event.id,
           data: event.data,
         };
 

@@ -1,10 +1,21 @@
 export enum AlertNames {
   Follow = 'follow',
+  Raid = 'raid',
 }
 
 export interface AlertQueueEvent {
-  type: string,
-  data: { [key: string]: string }
+  type: string;
+  id: string;
+  data: { [key: string]: any };
+}
+
+export interface RaidAlert extends AlertQueueEvent {
+  type: AlertNames.Raid;
+  data: {
+    raiderCount: number;
+    raider: string;
+    logoUrl: string;
+  };
 }
 
 export interface FollowAlert extends AlertQueueEvent {

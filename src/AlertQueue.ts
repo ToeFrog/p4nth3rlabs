@@ -8,7 +8,7 @@ export function useAlertQueue(dispatch: Dispatch<any>): AlertQueueEvent | null {
 
   useEffect(() => {
     if (ctx.state.alerts.length === 0) setCurrentAlert(null);
-    else if (currentAlert !== ctx.state.alerts[0]) {
+    else if (currentAlert?.id !== ctx.state.alerts[0].id) {
       setCurrentAlert(ctx.state.alerts[0]);
       setTimeout(() => dispatch({ type: 'alert_complete' }), 3000);
     }
