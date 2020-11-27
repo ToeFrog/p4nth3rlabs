@@ -67,6 +67,7 @@ export default function Alert(props: AlertProps) {
   const debug = false;
   let debugAlert = {
     type: 'debug',
+    id: Date.now()
   };
 
   const alert = useAlertQueue(props.dispatch);
@@ -74,19 +75,17 @@ export default function Alert(props: AlertProps) {
   let displayText = debug ? getBannerText(debugAlert) : getBannerText(alert);
 
   return (
-    <>
-      <AlertContainer>
-        <AlertBanner>
-          <BannerImage />
-          <BannerTextPath displayText={displayText.banner} />
-        </AlertBanner>
+    <AlertContainer key={alert!.id}>
+      <AlertBanner>
+        <BannerImage />
+        <BannerTextPath displayText={displayText.banner} />
+      </AlertBanner>
 
-        <AlertLogo src={displayText.logoUrl} alt={displayText.imgAlt} />
+      <AlertLogo src={displayText.logoUrl} alt={displayText.imgAlt} />
 
-        <AlertNameContainer>
-          <AlertName>{displayText.footer}</AlertName>
-        </AlertNameContainer>
-      </AlertContainer>
-    </>
+      <AlertNameContainer>
+        <AlertName>{displayText.footer}</AlertName>
+      </AlertNameContainer>
+    </AlertContainer>
   );
 }
