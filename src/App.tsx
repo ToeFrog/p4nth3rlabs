@@ -23,7 +23,16 @@ function App(props: AppProps) {
       socket.on(MainframeEvent.chatmessage, (event: WebsocketEvent) => {
         dispatch({
           type: 'addChatMessage',
-          chatMessage: event.data,
+          data: event.data,
+        });
+      });
+
+      socket.on(MainframeEvent.follow, (event: WebsocketEvent) => {
+        console.log(event.data);
+
+        dispatch({
+          type: 'follow',
+          data: event.data,
         });
       });
     }
@@ -37,6 +46,7 @@ function App(props: AppProps) {
 
   const initialState: AppState = {
     chatMessages: [],
+    alerts: [],
   };
 
   const [state, dispatch] = useReducer(AppReducer, initialState);
