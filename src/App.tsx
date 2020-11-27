@@ -1,4 +1,4 @@
-import { useReducer, useEffect, Dispatch } from 'react';
+import React, { useReducer, useEffect, Dispatch } from 'react';
 import Socket from './socket';
 import AppContext, { AppState } from './AppContext';
 import AppReducer from './AppReducer';
@@ -10,28 +10,28 @@ interface AppProps {
   uri: string | undefined;
 }
 
-async function listenForChatMessages(socket: any, dispatch: Dispatch<any>) {
-  socket.on(MainframeEvent.chatmessage, async (event: WebsocketEvent) => {
-    dispatch({
-      type: 'addChatMessage',
-      chatMessage: event.data,
-    });
-  });
-}
-
 function App(props: AppProps) {
   const { uri } = props;
 
   useEffect(() => {
+    let socket: any;
     if (uri && uri.length > 0) {
-      const socket = new Socket(uri, {
+      socket = new Socket(uri, {
         reconnect: true,
       });
 
-      listenForChatMessages(socket, dispatch);
+      socket.on(MainframeEvent.chatmessage, (event: WebsocketEvent) => {
+        dispatch({
+          type: 'addChatMessage',
+          chatMessage: event.data,
+        });
+      });
     }
     return () => {
       // cleanup
+      if (socket) {
+        socket.disconnect();
+      }
     };
   }, [uri]);
 

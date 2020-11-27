@@ -22,7 +22,7 @@ export interface WebsocketEvent {
 }
 
 // eslint-disable-next-line no-unused-vars
-export type Callback = (data: unknown) => void;
+export type Callback = (data: any) => void;
 
 export type TrustedEventMap = {
   raw: Set<Callback>;

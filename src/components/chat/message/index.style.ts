@@ -70,7 +70,7 @@ const broadcasterBorderImage = css`
 `;
 
 const ChatMessage = styled.div<ChatMessageProps>`
-  // animation: ${slideInLeft} 0.3s ease forwards, ${slideOutLeft} 0.5s ease 10000ms forwards;
+  animation: ${slideInLeft} 0.3s ease forwards, ${slideOutLeft} 0.5s ease 10000ms forwards;
   background-color: var(--black);
   display: flex;
   flex-direction: row;
@@ -96,14 +96,20 @@ const ChatMessage = styled.div<ChatMessageProps>`
 
 const vipLinearGradient = css`
   background: linear-gradient(90deg, var(--yellow), var(--vip));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 `;
 
 const modLinearGradient = css`
   background: linear-gradient(90deg, var(--yellow), var(--mod));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 `;
 
 const broadcasterLinearGradient = css`
   background: linear-gradient(90deg, var(--yellow), var(--broadcaster));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 `;
 
 const DisplayName = styled.p<ChatMessageProps>`
@@ -112,8 +118,6 @@ const DisplayName = styled.p<ChatMessageProps>`
   margin-bottom: 1rem;
   color: var(--yellow);
   font-weight: var(--font-weight-bold);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
 
   ${(props) => (props.isVip ? vipLinearGradient : '')};
   ${(props) => (props.isMod ? modLinearGradient : '')};

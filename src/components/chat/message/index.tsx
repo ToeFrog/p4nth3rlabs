@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   ChatMessage,
   DisplayName,
@@ -21,6 +22,8 @@ export default function Message(props: MessageProps) {
   const startsWithTag = processedChat.message.startsWith('<span class="tag">');
   const isAction: boolean = processedChat.type === 'action';
 
+  const isDefault = !isVip && !isBroadcaster && !isSubscriber;
+
   return (
     <ChatMessage
       isSubscriber={isSubscriber}
@@ -32,7 +35,7 @@ export default function Message(props: MessageProps) {
       <AvatarContainer backgroundImage={logoUrl} />
       <MessageContainer>
         <DisplayName
-          className="background-clip-text-hack"
+          className={!isDefault ? `background-clip-text-hack` : ``}
           isSubscriber={isSubscriber}
           isBroadcaster={isBroadcaster}
           isVip={isVip}
