@@ -97,7 +97,7 @@ export default function Alert(props: AlertProps) {
 
       <AlertLogo src={displayText.logoUrl} alt={displayText.imgAlt} />
 
-      <AlertNameContainer>
+      <AlertNameContainer alertType={alert.type}>
         <AlertName>{displayText.footer}</AlertName>
       </AlertNameContainer>
     </AlertContainer>

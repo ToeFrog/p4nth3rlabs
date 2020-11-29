@@ -1,3 +1,4 @@
+import { AlertNames } from './types';
 import styled, { keyframes, css } from 'styled-components';
 
 const doAnimation = true;
@@ -132,7 +133,36 @@ const AlertLogo = styled.img`
   border: 0.5rem solid var(--yellow);
 `;
 
-const AlertNameContainer = styled.h1`
+function getAlertContainerBackgroundCss(alertType: string): any {
+  let color;
+  switch (alertType) {
+    case AlertNames.Follow:
+      color = 'red';
+      break;
+    case AlertNames.Raid:
+      color = 'black';
+      break;
+    case AlertNames.Cheer:
+      color = 'green';
+      break;
+    case AlertNames.Sub:
+      color = 'red';
+      break;
+    default:
+      color = 'red';
+  }
+
+  return css`
+    background-color: var(--${color});
+    background-image: url('/assets/bg-${color}.svg');
+  `;
+}
+
+interface AlertNameContainerProps {
+  alertType: string;
+}
+
+const AlertNameContainer = styled.h1<AlertNameContainerProps>`
   ${doAnimation
     ? css`
         animation: ${bounceInRight} 1s var(--cb-animation),
@@ -150,9 +180,8 @@ const AlertNameContainer = styled.h1`
   right: 0;
   bottom: 38%;
   padding: 3rem 1.25rem 1rem 1.25rem;
-  background-color: var(--red);
-  background-image: url('/assets/bg-red.svg');
   background-size: cover;
+  ${(props) => getAlertContainerBackgroundCss(props.alertType)}
 `;
 
 const AlertName = styled.span`
