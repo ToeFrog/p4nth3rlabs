@@ -69,9 +69,9 @@ function getAlertAudioUrl(type: string) {
     case AlertNames.Raid:
       return process.env.REACT_APP_AUDIO_ALERT_RAID_URL;
     case AlertNames.Cheer:
-      return process.env.REACT_APP_AUDIO_CHEER_RAID_URL;
+      return process.env.REACT_APP_AUDIO_ALERT_CHEER_URL;
     case AlertNames.Sub:
-      return process.env.REACT_APP_AUDIO_SUB_RAID_URL;
+      return process.env.REACT_APP_AUDIO_ALERT_SUB_URL;
     default:
       return process.env.REACT_APP_AUDIO_ALERT_FOLLOW_URL;
   }

@@ -1,7 +1,7 @@
 import { AlertNames } from './types';
 import styled, { keyframes, css } from 'styled-components';
 
-const doAnimation = true;
+const doAnimation = false;
 
 const dropDownBounce = keyframes`
   0% { 
@@ -154,7 +154,7 @@ function getAlertContainerBackgroundCss(alertType: string): any {
 
   return css`
     background-color: var(--${color});
-    background-image: url('/assets/bg-${color}.svg');
+    background-image: url('/assets/bg-${color}.png');
   `;
 }
 
