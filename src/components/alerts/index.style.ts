@@ -146,7 +146,7 @@ function getAlertContainerBackgroundCss(alertType: string): any {
       color = 'green';
       break;
     case AlertNames.Sub:
-      color = 'red';
+      color = 'yellow';
       break;
     default:
       color = 'red';

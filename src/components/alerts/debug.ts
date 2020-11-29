@@ -1,5 +1,5 @@
 export const debugAlert = {
-  type: 'cheer',
+  type: 'sub',
   id: Date.now().toString(),
   data: {
     cheererName: 'Mystery cheerer',
