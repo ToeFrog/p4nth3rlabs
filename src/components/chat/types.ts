@@ -22,6 +22,7 @@ export interface ChatMessageEvent {
   isSubscriber: boolean;
   isBroadcaster: boolean;
   isTeamMember: boolean;
+  teamMemberIconUrl: string;
   emotes?: {
     [emoteid: string]: string[];
   };

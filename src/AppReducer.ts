@@ -3,6 +3,8 @@ import type { ChatMessageEvent } from './components/chat/types';
 import type { AlertQueueEvent } from './components/alerts/types';
 import { MaxMessageCount } from './components/chat';
 import { MainframeEvent } from './types';
+import { getTeamMemberIconUrl } from './components/chat/message/utils';
+
 interface AppAction {
   type: string;
   data: AlertQueueEvent | ChatMessageEvent;
@@ -13,6 +15,10 @@ export default function AppReducer(state: AppState, action: AppAction) {
 
   switch (action.type) {
     case 'addChatMessage':
+      (action.data as ChatMessageEvent).teamMemberIconUrl = getTeamMemberIconUrl(
+        (action.data as ChatMessageEvent).isTeamMember,
+      );
+
       newState.chatMessages.push(action.data as ChatMessageEvent);
 
       if (newState.chatMessages.length > MaxMessageCount) {

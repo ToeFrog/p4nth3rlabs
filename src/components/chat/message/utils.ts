@@ -1,6 +1,19 @@
 import type { ChatMessageEvent, ConstructedEmote } from '../types';
 import sanitizeHtml from 'sanitize-html';
 
+export const getTeamMemberIconUrl = (isTeamMember: boolean): string => {
+  const teamMemberIconUrls = [
+    'https://static-cdn.jtvnw.net/emoticons/v2/302880696/default/dark/3.0',
+    'https://static-cdn.jtvnw.net/emoticons/v2/303132137/default/dark/3.0',
+    'https://static-cdn.jtvnw.net/emoticons/v2/303132133/default/dark/3.0',
+    'https://static-cdn.jtvnw.net/emoticons/v2/302880702/default/dark/3.0',
+  ];
+
+  return isTeamMember
+    ? teamMemberIconUrls[Math.floor(Math.random() * teamMemberIconUrls.length)]
+    : '';
+};
+
 export function processChat(chat_event: ChatMessageEvent) {
   let tempMessage: string = chat_event.message.replace(/<img/g, '<DEL');
 

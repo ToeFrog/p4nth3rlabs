@@ -6,6 +6,7 @@ interface ChatMessageProps {
   isVip: boolean;
   isMod: boolean;
   isTeamMember: boolean;
+  teamMemberIconUrl: string;
 }
 
 interface MessageTextProps {
@@ -57,6 +58,22 @@ const renderBroadcasterAfter = css`
   border-left: 20px solid var(--broadcaster);
 `;
 
+const renderIsTeamMemberBefore = (imgUrl: string | undefined) => {
+  if (imgUrl !== undefined) {
+    return css`
+      &:before {
+        content: url('${imgUrl}');
+        position: absolute;
+        bottom: -12px;
+        right: -10px;
+        transform: rotate(-60deg);
+        opacity: 0.4;
+        z-index: 1;
+      }
+    `;
+  }
+};
+
 const vipBorderImage = css`
   border-image-source: linear-gradient(90deg, var(--yellow) 0%, var(--vip) 100%);
 `;
@@ -92,6 +109,7 @@ const ChatMessage = styled.div<ChatMessageProps>`
   ${(props) => (props.isVip ? vipBorderImage : '')};
   ${(props) => (props.isMod ? modBorderImage : '')};
   ${(props) => (props.isBroadcaster ? broadcasterBorderImage : '')};
+  ${(props) => (props.isTeamMember ? renderIsTeamMemberBefore(props.teamMemberIconUrl) : '')}
 `;
 
 const vipLinearGradient = css`
@@ -141,9 +159,11 @@ const MessageText = styled.div<MessageTextProps>`
   line-height: 1.6rem;
   font-weight: var(--font-weight-normal);
   width: 100%;
-
+  z-index: 2;
+  position: relative;
+  text-shadow: 2px 2px var(--black);
   ${(props) => (props.isAction ? MessageActionStyles : '')}
-  ${(props) => (props.startsWithTag ? StartswithTagStyles : '')}
+  ${(props) => (props.startsWithTag ? StartswithTagStyles : '')};
 `;
 
 const AvatarContainer = styled.div<AvatarContainerProps>`
