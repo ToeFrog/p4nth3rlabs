@@ -16,7 +16,16 @@ interface MessageProps {
 
 export default function Message(props: MessageProps) {
   const { message } = props;
-  const { displayName, logoUrl, isMod, isVip, isSubscriber, isBroadcaster, isTeamMember } = message;
+  const {
+    displayName,
+    logoUrl,
+    isMod,
+    isVip,
+    isSubscriber,
+    isBroadcaster,
+    isTeamMember,
+    teamMemberIconUrl,
+  } = message;
 
   const processedChat = processChat(message);
   const startsWithTag = processedChat.message.startsWith('<span class="tag">');
@@ -31,6 +40,7 @@ export default function Message(props: MessageProps) {
       isVip={isVip}
       isMod={isMod}
       isTeamMember={isTeamMember}
+      teamMemberIconUrl={teamMemberIconUrl}
     >
       <AvatarContainer backgroundImage={logoUrl} />
       <MessageContainer>
@@ -41,6 +51,7 @@ export default function Message(props: MessageProps) {
           isVip={isVip}
           isMod={isMod}
           isTeamMember={isTeamMember}
+          teamMemberIconUrl={teamMemberIconUrl}
         >
           @{displayName}
         </DisplayName>
