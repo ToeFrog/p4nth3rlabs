@@ -7,7 +7,7 @@ const MessageQueue = styled.div<MessageQueueProps>`
   flex-direction: column;
   position: fixed;
   left: 0;
-  bottom: 120px;
+  bottom: 140px;
   width: 400px;
   z-index: 2;
 `;
