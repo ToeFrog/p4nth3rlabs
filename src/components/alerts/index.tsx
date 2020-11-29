@@ -10,7 +10,7 @@ import BannerImage from './svg/bannerImage';
 import BannerTextPath from './svg/bannerTextPath';
 import { AlertNames } from './types';
 import { useAlertQueue } from '../../AlertQueue';
-import { debugAlert } from './debug'
+import { debugAlert } from './debug';
 
 interface AlertProps {
   dispatch: Dispatch<any>;
@@ -35,15 +35,20 @@ function getBannerText(alert: any): any {
     case AlertNames.Cheer:
       return {
         banner: `Bits! Cheers!`,
-        footer: `${alert.data.bitCount} bit${alert.data.bitCount > 1?'s':''} from ${alert.data.cheererName}!`,
+        footer: `${alert.data.bitCount} bit${alert.data.bitCount > 1 ? 's' : ''} from ${
+          alert.data.cheererName
+        }!`,
         imgAlt: alert.data.cheererName,
         logoUrl: alert.data.logoUrl,
       };
     case AlertNames.Sub:
-      let tierText = (alert.data.subTier === 'Prime') ? 'with Twitch Prime' : `at Tier ${alert.data.subTier}`;
+      let tierText =
+        alert.data.subTier === 'Prime' ? 'with Twitch Prime' : `at Tier ${alert.data.subTier}`;
       return {
         banner: alert.data.months > 0 ? `Resub!` : `New sub!`,
-        footer: `${alert.data.subscriberUsername} has ${alert.data.months > 0 ? 're' : ''}subscribed ${tierText}!`,
+        footer: `${alert.data.subscriberUsername} has ${
+          alert.data.months > 0 ? 're' : ''
+        }subscribed ${tierText}!`,
         imgAlt: alert.data.subscriberUsername,
         logoUrl: alert.data.logoUrl,
       };
@@ -57,6 +62,21 @@ function getBannerText(alert: any): any {
   }
 }
 
+function getAlertAudioUrl(type: string) {
+  switch (type) {
+    case AlertNames.Follow:
+      return process.env.REACT_APP_AUDIO_ALERT_FOLLOW_URL;
+    case AlertNames.Raid:
+      return process.env.REACT_APP_AUDIO_ALERT_RAID_URL;
+    case AlertNames.Cheer:
+      return process.env.REACT_APP_AUDIO_CHEER_RAID_URL;
+    case AlertNames.Sub:
+      return process.env.REACT_APP_AUDIO_SUB_RAID_URL;
+    default:
+      return process.env.REACT_APP_AUDIO_ALERT_FOLLOW_URL;
+  }
+}
+
 export default function Alert(props: AlertProps) {
   const debug = false;
   let alert = useAlertQueue(props.dispatch);
@@ -64,21 +84,24 @@ export default function Alert(props: AlertProps) {
   if (!alert) return null;
   const displayText = debug ? getBannerText(debugAlert) : getBannerText(alert);
 
+  const alertAudioUrl = getAlertAudioUrl(alert.type);
+  console.log(alertAudioUrl);
+
   return (
-      <AlertContainer key={alert.id}>
-        <audio autoPlay>
-          <source src={`./audio/${alert.type}.mp3`} type="audio/mp3" />
-        </audio>
-        <AlertBanner>
-          <BannerImage />
-          <BannerTextPath displayText={displayText.banner} />
-        </AlertBanner>
-        
-        <AlertLogo src={displayText.logoUrl} alt={displayText.imgAlt} />
-        
-        <AlertNameContainer>
-          <AlertName>{displayText.footer}</AlertName>
-        </AlertNameContainer>
-      </AlertContainer>
+    <AlertContainer key={alert.id}>
+      <audio autoPlay>
+        <source src={alertAudioUrl} type="audio/mp3" />
+      </audio>
+      <AlertBanner>
+        <BannerImage />
+        <BannerTextPath displayText={displayText.banner} />
+      </AlertBanner>
+
+      <AlertLogo src={displayText.logoUrl} alt={displayText.imgAlt} />
+
+      <AlertNameContainer>
+        <AlertName>{displayText.footer}</AlertName>
+      </AlertNameContainer>
+    </AlertContainer>
   );
 }

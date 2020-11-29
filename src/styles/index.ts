@@ -3,7 +3,7 @@ import { createGlobalStyle } from 'styled-components';
 const GlobalStyle = createGlobalStyle`
   :root {
     --cb-animation: cubic-bezier(.51,.56,.11,1.03);
-    --alert-display-time: 2900ms;
+    --alert-display-time: 3900ms;
     --red: #f11012;
     --red-darker: #d90d10;
     --green: #82af3a;
