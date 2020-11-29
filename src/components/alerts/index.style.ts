@@ -107,6 +107,7 @@ const AlertContainer = styled.div`
   margin-left: auto;
   margin-right: auto;
   z-index: 1;
+  margin-top: -120px;
 `;
 
 const AlertLogo = styled.img`
