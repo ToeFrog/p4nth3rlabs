@@ -106,6 +106,7 @@ const AlertContainer = styled.div`
   flex-direction: column;
   margin-left: auto;
   margin-right: auto;
+  z-index: 1;
 `;
 
 const AlertLogo = styled.img`

@@ -83,9 +83,7 @@ export default function Alert(props: AlertProps) {
   if (debug) alert = debugAlert;
   if (!alert) return null;
   const displayText = debug ? getBannerText(debugAlert) : getBannerText(alert);
-
   const alertAudioUrl = getAlertAudioUrl(alert.type);
-  console.log(alertAudioUrl);
 
   return (
     <AlertContainer key={alert.id}>

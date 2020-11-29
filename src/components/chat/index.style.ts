@@ -7,8 +7,9 @@ const MessageQueue = styled.div<MessageQueueProps>`
   flex-direction: column;
   position: fixed;
   left: 0;
-  bottom: 0;
+  bottom: 120px;
   width: 400px;
+  z-index: 2;
 `;
 
 export { MessageQueue };
