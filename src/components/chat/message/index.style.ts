@@ -162,7 +162,7 @@ const MessageText = styled.div<MessageTextProps>`
   z-index: 2;
   position: relative;
   text-shadow: 2px 2px var(--black);
-  ${(props) => (props.isAction ? MessageActionStyles : '')}
+  ${(props) => (props.isAction ? MessageActionStyles : '')};
   ${(props) => (props.startsWithTag ? StartswithTagStyles : '')};
 `;
 
