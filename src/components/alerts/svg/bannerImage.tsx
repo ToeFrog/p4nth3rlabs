@@ -4,8 +4,6 @@ export default function BannerImage() {
   return (
     <svg
       className="alert__bannerImage"
-      width="800"
-      height="244"
       viewBox="0 0 800 244"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

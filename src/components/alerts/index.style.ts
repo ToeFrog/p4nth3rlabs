@@ -5,7 +5,7 @@ const doAnimation = true;
 
 const dropDownBounce = keyframes`
   0% { 
-    transform: scale(1,1) translateY(-100%); 
+    transform: scale(1,1) translateY(-200%); 
   }
   10% { 
     transform: translateY(0); 
@@ -27,12 +27,12 @@ const dropDownBounce = keyframes`
   }
 `;
 
-const swoopUp = keyframes`
+const swoopDown = keyframes`
     0% {
       transform: translateY(0);
     }
     100% {
-      transform: scale(1,1) translateY(-100%); ;
+      transform: scale(1,1) translateY(400%); ;
     }
   `;
 
@@ -102,13 +102,22 @@ const scrollUpSlowly = keyframes`
 
 const AlertContainer = styled.div`
   text-align: center;
-  width: 500px;
+  width: 100%;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-content: center;
   margin-left: auto;
   margin-right: auto;
   z-index: 1;
-  margin-top: -120px;
+`;
+
+const AlertContainerInner = styled.div`
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  position: relative;
 `;
 
 const AlertLogo = styled.img`
@@ -178,7 +187,7 @@ const AlertNameContainer = styled.h1<AlertNameContainerProps>`
   position: absolute;
   left: 0;
   right: 0;
-  bottom: 38%;
+  bottom: 410px;
   padding: 3rem 1.25rem 1rem 1.25rem;
   background-size: cover;
   ${(props) => getAlertContainerBackgroundCss(props.alertType)}
@@ -196,15 +205,26 @@ const AlertBanner = styled.div`
   ${doAnimation
     ? css`
         animation: ${dropDownBounce} 0.8s ease-in-out,
-          ${swoopUp} 0.5s ease var(--alert-display-time) forwards;
+          ${swoopDown} 0.5s ease var(--alert-display-time) forwards;
       `
     : ''}
   width: 100%;
   z-index: 2;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 406px;
 `;
 
 //alert__subtitle in global styles
 //alert__bannerTextPath in global styles
 //alert__bannerImage in global styles
 
-export { AlertContainer, AlertLogo, AlertNameContainer, AlertName, AlertBanner };
+export {
+  AlertContainer,
+  AlertLogo,
+  AlertNameContainer,
+  AlertName,
+  AlertBanner,
+  AlertContainerInner,
+};
