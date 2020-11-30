@@ -1,5 +1,5 @@
 import React, { useReducer, useEffect } from 'react';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Socket from './socket';
 import AppContext, { AppState } from './AppContext';
 import AppReducer from './AppReducer';
