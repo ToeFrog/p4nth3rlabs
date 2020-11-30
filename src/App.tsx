@@ -1,4 +1,5 @@
 import React, { useReducer, useEffect } from 'react';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import Socket from './socket';
 import AppContext, { AppState } from './AppContext';
 import AppReducer from './AppReducer';
@@ -98,8 +99,17 @@ function App(props: AppProps) {
   return (
     <AppContext.Provider value={{ state, dispatch }}>
       <GlobalStyle />
-      <MessageQueue />
-      <Alerts dispatch={dispatch} />
+
+      <Router>
+        <Switch>
+          <Route path="/chat">
+            <MessageQueue />
+          </Route>
+          <Route path="/alerts">
+            <Alerts dispatch={dispatch} />
+          </Route>
+        </Switch>
+      </Router>
     </AppContext.Provider>
   );
 }
