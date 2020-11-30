@@ -5,6 +5,7 @@ import {
   AlertNameContainer,
   AlertName,
   AlertBanner,
+  AlertContainerInner,
 } from './index.style';
 import BannerImage from './svg/bannerImage';
 import BannerTextPath from './svg/bannerTextPath';
@@ -90,12 +91,13 @@ export default function Alert(props: AlertProps) {
       <audio autoPlay>
         <source src={alertAudioUrl} type="audio/mp3" />
       </audio>
-      <AlertBanner>
-        <BannerImage />
-        <BannerTextPath displayText={displayText.banner} />
-      </AlertBanner>
-
-      <AlertLogo src={displayText.logoUrl} alt={displayText.imgAlt} />
+      <AlertContainerInner>
+        <AlertLogo src={displayText.logoUrl} alt={displayText.imgAlt} />
+        <AlertBanner>
+          <BannerImage />
+          <BannerTextPath displayText={displayText.banner} />
+        </AlertBanner>
+      </AlertContainerInner>
 
       <AlertNameContainer alertType={alert.type}>
         <AlertName>{displayText.footer}</AlertName>

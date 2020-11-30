@@ -89,13 +89,12 @@ const GlobalStyle = createGlobalStyle`
   
   .alert__bannerImage {
     width: 100%;
-    margin-top: 366px;
   }
 
   .alert__bannerTextPath {
     overflow: visible;
     position: relative;
-    bottom: 192px;
+    bottom: 100px;
     width: 100%;
   }
 `;
