@@ -1,7 +1,7 @@
 import { AlertNames } from './types';
 import styled, { keyframes, css } from 'styled-components';
 
-const doAnimation = false;
+const doAnimation = true;
 
 const dropDownBounce = keyframes`
   0% { 
