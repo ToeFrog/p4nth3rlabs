@@ -8,20 +8,25 @@ const FooterContainer = styled.div`
   height: 100vh;
 `;
 
-const TextBox = styled.p`
+const TextBox = styled.div`
   background-color: var(--black);
   border-radius: 8px;
   position: relative;
-  color: var(--white);
-  font-family: var(--font-family-main);
-  font-size: 18px;
-  text-transform: uppercase;
-  font-weight: bold;
   padding: 4px 16px;
-  display: inline;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
   position: relative;
   left: 1205px;
   top: 1012px;
 `;
 
-export { FooterContainer, TextBox };
+const TextBoxText = styled.span`
+  color: var(--white);
+  font-family: var(--font-family-main);
+  font-size: 18px;
+  text-transform: uppercase;
+  font-weight: bold;
+`;
+
+export { FooterContainer, TextBox, TextBoxText };
