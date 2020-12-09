@@ -67,6 +67,7 @@ function getGrowAnimation(props: TextBoxProps) {
 
 const textBoxHeight = '36px';
 const textBoxBorderRadius = '8px';
+const textBoxSideWidth = '12px';
 
 const TextBoxContainer = styled.div`
   position: relative;
@@ -92,7 +93,7 @@ const TextBox = styled.div<TextBoxProps>`
 `;
 
 const TextBoxLeft = styled.span`
-  width: ${textBoxBorderRadius};
+  width: ${textBoxSideWidth};
   height: 100%;
   display: inline-flex;
   justify-content: flex-start;
@@ -101,7 +102,7 @@ const TextBoxLeft = styled.span`
   background-color: var(--black);
 `;
 const TextBoxRight = styled.span`
-  width: ${textBoxBorderRadius};
+  width: ${textBoxSideWidth};
   height: 100%;
   display: inline-flex;
   justify-content: flex-start;
