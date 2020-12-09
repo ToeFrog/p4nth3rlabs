@@ -14,10 +14,11 @@ const fadeIn = keyframes`
 
 const FooterContainer = styled.div`
   display: block;
-  position: relative;
+  position: fixed;
   background-image: url('/assets/footer-bar.png');
   background-size: cover;
-  height: 100vh;
+  height: 1080px;
+  width: 1920px;
 `;
 
 interface TextBoxProps {
@@ -129,4 +130,59 @@ const TextBoxText = styled.span`
   width: 100%;
 `;
 
-export { FooterContainer, TextBox, TextBoxText, TextBoxLeft, TextBoxRight, TextBoxContainer };
+const FireIconContainerLeft = styled.span``;
+const FireIconContainerRight = styled.span``;
+const LighteningIconContainerLeft = styled.span``;
+const LighteningIconContainerRight = styled.span``;
+const HeartIconContainerLeft = styled.span``;
+const HeartIconContainerRight = styled.span``;
+const PewCoinContainer = styled.span``;
+
+const HeartPantherContainer = styled.span`
+  position: absolute;
+  display: inline-block;
+  width: 92px;
+  height: 92px;
+  left: 34px;
+  top: 969px;
+  transform: rotate(7deg);
+`;
+
+const MajickPantherContainer = styled.span`
+  position: absolute;
+  display: inline-block;
+  width: 126px;
+  height: 126px;
+  left: 137px;
+  top: 936px;
+  transform: rotate(-14deg);
+`;
+
+const PewPewPantherContainer = styled.span`
+  position: absolute;
+  display: inline-block;
+  width: 234px;
+  height: 130px;
+  left: 240px;
+  top: 956px;
+  transform: rotate(8deg);
+`;
+
+export {
+  FooterContainer,
+  TextBox,
+  TextBoxText,
+  TextBoxLeft,
+  TextBoxRight,
+  TextBoxContainer,
+  FireIconContainerLeft,
+  FireIconContainerRight,
+  LighteningIconContainerLeft,
+  LighteningIconContainerRight,
+  HeartIconContainerLeft,
+  HeartIconContainerRight,
+  PewCoinContainer,
+  HeartPantherContainer,
+  MajickPantherContainer,
+  PewPewPantherContainer,
+};

@@ -7,7 +7,21 @@ import {
   TextBoxLeft,
   TextBoxRight,
   TextBoxContainer,
+  FireIconContainerLeft,
+  FireIconContainerRight,
+  LighteningIconContainerLeft,
+  LighteningIconContainerRight,
+  HeartIconContainerLeft,
+  HeartIconContainerRight,
+  PewCoinContainer,
+  HeartPantherContainer,
+  MajickPantherContainer,
+  PewPewPantherContainer,
 } from './index.style';
+
+import HeartPanther from './svg/HeartPanther';
+import MajickPanther from './svg/MajickPanther';
+import PewPewPanther from './svg/PewPewPanther';
 
 interface OverlayProps {}
 
@@ -56,6 +70,26 @@ export default function Overlay(props: OverlayProps) {
 
   return (
     <FooterContainer>
+      <FireIconContainerLeft />
+      <FireIconContainerRight />
+      <LighteningIconContainerLeft />
+      <LighteningIconContainerRight />
+      <HeartIconContainerLeft />
+      <HeartIconContainerRight />
+      <PewCoinContainer />
+
+      <HeartPantherContainer>
+        <HeartPanther />
+      </HeartPantherContainer>
+
+      <MajickPantherContainer>
+        <MajickPanther />
+      </MajickPantherContainer>
+
+      <PewPewPantherContainer>
+        <PewPewPanther />
+      </PewPewPantherContainer>
+
       <TextBoxContainer>
         <TextBoxLeft />
         <TextBox key={`item-${textBoxCurrentKey}`} type={textBox.type}>
