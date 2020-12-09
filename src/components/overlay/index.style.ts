@@ -175,7 +175,7 @@ const PewCoinContainer = styled.span`
   position: absolute;
   width: 18px;
   height: 18px;
-  left: 270px;
+  left: 276px;
   bottom: 10px;
   transform: rotate(12deg);
 
@@ -216,7 +216,7 @@ const MajickPantherContainer = styled.span`
   display: inline-block;
   width: 126px;
   height: 126px;
-  left: 137px;
+  left: 140px;
   top: 948px;
   transform: rotate(-14deg);
 

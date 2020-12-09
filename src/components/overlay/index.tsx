@@ -56,18 +56,18 @@ const textBoxOptions: TextBoxOption[] = [
 ];
 
 export default function Overlay(props: OverlayProps) {
-  const [textBox, setTextBox] = useState(textBoxOptions[0]);
   const [textBoxCurrentKey, setTextBoxCurrentKey] = useState(0);
+  const [textBox, setTextBox] = useState(textBoxOptions[textBoxCurrentKey]);
+  const atEndOfOptions = textBoxCurrentKey + 1 > textBoxOptions.length - 1;
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setTextBoxCurrentKey(
-        textBoxCurrentKey + 1 > textBoxOptions.length - 1 ? 0 : textBoxCurrentKey + 1,
-      );
-      setTextBox(textBoxOptions[textBoxCurrentKey]);
+      const newKey = atEndOfOptions ? (0 as number) : ((textBoxCurrentKey + 1) as number);
+      setTextBoxCurrentKey(newKey);
+      setTextBox(textBoxOptions[newKey]);
     }, 30000);
     return () => clearInterval(interval);
-  }, [textBoxCurrentKey]);
+  }, [textBoxCurrentKey, atEndOfOptions]);
 
   return (
     <FooterContainer>
