@@ -77,6 +77,11 @@ const TextBoxContainer = styled.div`
   height: ${textBoxHeight};
   left: 1205px;
   top: 1002px;
+  max-width: fit-content;
+  overflow: hidden;
+  background: transparent;
+  border-radius: ${textBoxBorderRadius};
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
 `;
 
 const TextBox = styled.div<TextBoxProps>`
@@ -99,14 +104,17 @@ const TextBoxLeft = styled.span`
   display: inline-flex;
   justify-content: flex-start;
   align-items: center;
+  overflow: hidden;
   border-radius: ${textBoxBorderRadius} 0 0 ${textBoxBorderRadius};
   background-color: var(--black);
 `;
+
 const TextBoxRight = styled.span`
   width: ${textBoxSideWidth};
   height: 100%;
   display: inline-flex;
   justify-content: flex-start;
+  overflow: hidden;
   align-items: center;
   border-radius: 0 ${textBoxBorderRadius} ${textBoxBorderRadius} 0;
   background-color: var(--black);
@@ -130,13 +138,64 @@ const TextBoxText = styled.span`
   width: 100%;
 `;
 
-const FireIconContainerLeft = styled.span``;
-const FireIconContainerRight = styled.span``;
-const LighteningIconContainerLeft = styled.span``;
-const LighteningIconContainerRight = styled.span``;
-const HeartIconContainerLeft = styled.span``;
-const HeartIconContainerRight = styled.span``;
-const PewCoinContainer = styled.span``;
+const svgDropShadow = css`
+  filter: drop-shadow(6px 10px 3px rgba(0, 0, 0, 0.22));
+`;
+
+const FireIconContainer = styled.span`
+  position: absolute;
+  display: inline-block;
+  width: 24px;
+  height: 31px;
+  left: 8px;
+  top: 997px;
+  transform: rotate(-11.55deg);
+
+  svg {
+    ${svgDropShadow}
+  }
+`;
+
+const LighteningIconContainer = styled.span`
+  position: absolute;
+  display: inline-block;
+  width: 16px;
+  height: 27px;
+  left: 21px;
+  bottom: 8px;
+  transform: rotate(-17deg);
+
+  svg {
+    ${svgDropShadow}
+  }
+`;
+
+const PewCoinContainer = styled.span`
+  display: inline-block;
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  left: 270px;
+  bottom: 10px;
+  transform: rotate(12deg);
+
+  svg {
+    ${svgDropShadow}
+  }
+`;
+
+const ExtraStarsContainer = styled.span`
+  display: inline-block;
+  position: absolute;
+  left: 110px;
+  bottom: 8px;
+  width: 49px;
+  height: 55px;
+
+  svg {
+    ${svgDropShadow}
+  }
+`;
 
 const HeartPantherContainer = styled.span`
   position: absolute;
@@ -146,6 +205,10 @@ const HeartPantherContainer = styled.span`
   left: 34px;
   top: 969px;
   transform: rotate(7deg);
+
+  svg {
+    ${svgDropShadow}
+  }
 `;
 
 const MajickPantherContainer = styled.span`
@@ -154,8 +217,12 @@ const MajickPantherContainer = styled.span`
   width: 126px;
   height: 126px;
   left: 137px;
-  top: 936px;
+  top: 948px;
   transform: rotate(-14deg);
+
+  svg {
+    ${svgDropShadow}
+  }
 `;
 
 const PewPewPantherContainer = styled.span`
@@ -166,6 +233,10 @@ const PewPewPantherContainer = styled.span`
   left: 240px;
   top: 956px;
   transform: rotate(8deg);
+
+  svg {
+    ${svgDropShadow}
+  }
 `;
 
 export {
@@ -175,13 +246,10 @@ export {
   TextBoxLeft,
   TextBoxRight,
   TextBoxContainer,
-  FireIconContainerLeft,
-  FireIconContainerRight,
-  LighteningIconContainerLeft,
-  LighteningIconContainerRight,
-  HeartIconContainerLeft,
-  HeartIconContainerRight,
+  FireIconContainer,
+  LighteningIconContainer,
   PewCoinContainer,
+  ExtraStarsContainer,
   HeartPantherContainer,
   MajickPantherContainer,
   PewPewPantherContainer,

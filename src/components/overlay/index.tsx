@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Icon from './icon';
+import Icon from './TextBoxIcons';
 import {
   FooterContainer,
   TextBox,
@@ -7,12 +7,9 @@ import {
   TextBoxLeft,
   TextBoxRight,
   TextBoxContainer,
-  FireIconContainerLeft,
-  FireIconContainerRight,
-  LighteningIconContainerLeft,
-  LighteningIconContainerRight,
-  HeartIconContainerLeft,
-  HeartIconContainerRight,
+  FireIconContainer,
+  LighteningIconContainer,
+  ExtraStarsContainer,
   PewCoinContainer,
   HeartPantherContainer,
   MajickPantherContainer,
@@ -22,6 +19,10 @@ import {
 import HeartPanther from './svg/HeartPanther';
 import MajickPanther from './svg/MajickPanther';
 import PewPewPanther from './svg/PewPewPanther';
+import PewCoin from './svg/PewCoin';
+import Fire from './svg/Fire';
+import Lightening from './svg/Lightening';
+import ExtraStars from './svg/ExtraStars';
 
 interface OverlayProps {}
 
@@ -70,13 +71,21 @@ export default function Overlay(props: OverlayProps) {
 
   return (
     <FooterContainer>
-      <FireIconContainerLeft />
-      <FireIconContainerRight />
-      <LighteningIconContainerLeft />
-      <LighteningIconContainerRight />
-      <HeartIconContainerLeft />
-      <HeartIconContainerRight />
-      <PewCoinContainer />
+      <FireIconContainer>
+        <Fire />
+      </FireIconContainer>
+
+      <LighteningIconContainer>
+        <Lightening />
+      </LighteningIconContainer>
+
+      <PewCoinContainer>
+        <PewCoin />
+      </PewCoinContainer>
+
+      <ExtraStarsContainer>
+        <ExtraStars />
+      </ExtraStarsContainer>
 
       <HeartPantherContainer>
         <HeartPanther />
