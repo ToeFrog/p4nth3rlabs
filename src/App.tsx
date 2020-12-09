@@ -5,6 +5,7 @@ import AppContext, { AppState } from './AppContext';
 import AppReducer from './AppReducer';
 import MessageQueue from './components/chat';
 import Alerts from './components/alerts';
+import Overlay from './components/overlay';
 import { GlobalStyle } from './styles';
 import { MainframeEvent, ChatWebsocketEvent, AlertWebsocketEvent } from './types';
 
@@ -107,6 +108,9 @@ function App(props: AppProps) {
           </Route>
           <Route path="/alerts">
             <Alerts dispatch={dispatch} />
+          </Route>
+          <Route path="/overlay">
+            <Overlay />
           </Route>
         </Switch>
       </Router>
