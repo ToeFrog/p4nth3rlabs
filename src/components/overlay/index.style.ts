@@ -1,4 +1,5 @@
 import styled, { keyframes, css } from 'styled-components';
+import { motion } from 'framer-motion';
 
 const textBoxWidths = {
   github: '400px',
@@ -142,21 +143,21 @@ const svgDropShadow = css`
   filter: drop-shadow(6px 10px 3px rgba(0, 0, 0, 0.22));
 `;
 
-const FireIconContainer = styled.span`
+const FireIconContainer = styled(motion.span)`
   position: absolute;
   display: inline-block;
   width: 24px;
   height: 31px;
   left: 8px;
   top: 997px;
-  transform: rotate(-11.55deg);
+  transform: rotate(-11deg);
 
   svg {
     ${svgDropShadow}
   }
 `;
 
-const LighteningIconContainer = styled.span`
+const LighteningIconContainer = styled(motion.span)`
   position: absolute;
   display: inline-block;
   width: 16px;
@@ -170,7 +171,7 @@ const LighteningIconContainer = styled.span`
   }
 `;
 
-const PewCoinContainer = styled.span`
+const PewCoinContainer = styled(motion.span)`
   display: inline-block;
   position: absolute;
   width: 18px;
@@ -197,7 +198,7 @@ const ExtraStarsContainer = styled.span`
   }
 `;
 
-const HeartPantherContainer = styled.span`
+const HeartPantherContainer = styled(motion.span)`
   position: absolute;
   display: inline-block;
   width: 92px;
@@ -211,7 +212,7 @@ const HeartPantherContainer = styled.span`
   }
 `;
 
-const MajickPantherContainer = styled.span`
+const MajickPantherContainer = styled(motion.span)`
   position: absolute;
   display: inline-block;
   width: 126px;
@@ -225,7 +226,7 @@ const MajickPantherContainer = styled.span`
   }
 `;
 
-const PewPewPantherContainer = styled.span`
+const PewPewPantherContainer = styled(motion.span)`
   position: absolute;
   display: inline-block;
   width: 234px;

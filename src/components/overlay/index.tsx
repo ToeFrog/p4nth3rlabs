@@ -87,15 +87,48 @@ export default function Overlay(props: OverlayProps) {
         <ExtraStars />
       </ExtraStarsContainer>
 
-      <HeartPantherContainer>
+      <HeartPantherContainer
+        animate={{
+          rotate: [7, 7, 7],
+          y: [0, -6, 0],
+        }}
+        transition={{
+          duration: 4,
+          ease: 'easeInOut',
+          times: [0, 0.5, 1],
+          loop: Infinity,
+        }}
+      >
         <HeartPanther />
       </HeartPantherContainer>
 
-      <MajickPantherContainer>
+      <MajickPantherContainer
+        animate={{
+          rotate: [-14, -14, -14],
+          y: [0, 8, 0],
+        }}
+        transition={{
+          duration: 8,
+          ease: 'easeInOut',
+          times: [0, 0.5, 1],
+          loop: Infinity,
+        }}
+      >
         <MajickPanther />
       </MajickPantherContainer>
 
-      <PewPewPantherContainer>
+      <PewPewPantherContainer
+        animate={{
+          rotate: [8, 8, 8],
+          y: [0, -5, 0],
+        }}
+        transition={{
+          duration: 5,
+          ease: 'easeInOut',
+          times: [0, 0.5, 1],
+          loop: Infinity,
+        }}
+      >
         <PewPewPanther />
       </PewPewPantherContainer>
 
