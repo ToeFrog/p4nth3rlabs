@@ -20,6 +20,7 @@ export interface ChatMessageEvent {
   isMod: boolean;
   isVip: boolean;
   isSubscriber: boolean;
+  isMyFavoriteStreamer: boolean;
   isBroadcaster: boolean;
   isTeamMember: boolean;
   teamMemberIconUrl: string;
