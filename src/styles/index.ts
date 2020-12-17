@@ -12,6 +12,9 @@ const GlobalStyle = createGlobalStyle`
     --offwhite: #f8f8f2;
     --yellow: #ffb626;
 
+    --bbb-pink: #FF00FF;
+    --bbb-blue: #00FFFF;
+
     --mod: #13a133;
     --vip: #d91ca8;
     --broadcaster: #e20f1f;

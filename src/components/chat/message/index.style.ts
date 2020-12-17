@@ -5,6 +5,7 @@ interface ChatMessageProps {
   isBroadcaster: boolean;
   isVip: boolean;
   isMod: boolean;
+  isMyFavoriteStreamer: boolean,
   isTeamMember: boolean;
   teamMemberIconUrl: string;
 }
@@ -82,6 +83,10 @@ const modBorderImage = css`
   border-image-source: linear-gradient(90deg, var(--yellow) 0%, var(--mod) 100%);
 `;
 
+const myFavoriteStreamerBorderImage = css`
+  border-image-source: linear-gradient(90deg, var(--bbb-pink) 0%, var(--bbb-blue) 100%);
+`;
+
 const broadcasterBorderImage = css`
   border-image-source: linear-gradient(90deg, var(--yellow) 0%, var(--broadcaster) 100%);
 `;
@@ -108,6 +113,7 @@ const ChatMessage = styled.div<ChatMessageProps>`
 
   ${(props) => (props.isVip ? vipBorderImage : '')};
   ${(props) => (props.isMod ? modBorderImage : '')};
+  ${(props) => (props.isMyFavoriteStreamer ? myFavoriteStreamerBorderImage : '')};
   ${(props) => (props.isBroadcaster ? broadcasterBorderImage : '')};
   ${(props) => (props.isTeamMember ? renderIsTeamMemberBefore(props.teamMemberIconUrl) : '')}
 `;
@@ -130,6 +136,12 @@ const broadcasterLinearGradient = css`
   -webkit-text-fill-color: transparent;
 `;
 
+const myFavoriteStreamerLinearGradient = css`
+  background: linear-gradient(90deg, var(--bbb-pink), var(--bbb-blue));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+`;
+
 const DisplayName = styled.p<ChatMessageProps>`
   color: var(--white);
   font-size: 1rem;
@@ -139,6 +151,7 @@ const DisplayName = styled.p<ChatMessageProps>`
 
   ${(props) => (props.isVip ? vipLinearGradient : '')};
   ${(props) => (props.isMod ? modLinearGradient : '')};
+  ${(props) => (props.isMyFavoriteStreamer ? myFavoriteStreamerLinearGradient : '')};
   ${(props) => (props.isBroadcaster ? broadcasterLinearGradient : '')};
 `;
 
