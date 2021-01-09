@@ -18,10 +18,6 @@ export const getRandomPanther = (currentPanther: string): string => {
 export default function Webcam() {
   const [currentPanther, setCurrentPanther] = useState<string>(Panthers.Cool);
 
-  const translateX = WebcamPosProps.width + WebcamPosProps.translateOffset;
-
-  const translateY = WebcamPosProps.height + WebcamPosProps.translateOffset;
-
   useEffect(() => {
     const interval = setInterval(() => {
       const newPanther = getRandomPanther(currentPanther);
@@ -37,8 +33,8 @@ export default function Webcam() {
         key={currentPanther}
         src={`/assets/panthers/${currentPanther}.png`}
         animate={{
-          x: [0, 0, 0, translateX, translateX, 0, 0, 0],
-          y: [0, 0, 0, 0, -translateY, -translateY, 0, 0],
+          x: [0, 0, 0, WebcamPosProps.width, WebcamPosProps.width, 0, 0, 0],
+          y: [0, 0, 0, 0, -WebcamPosProps.height, -WebcamPosProps.height, 0, 0],
           scale: [0, 1, 1, 1, 1, 1, 1, 0],
           rotate: [-360, 0, 0, 0, 0, 0, 0, 360],
         }}

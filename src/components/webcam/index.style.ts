@@ -3,10 +3,9 @@ import { motion } from 'framer-motion';
 
 export const WebcamPosProps = {
   pantherOffset: -48,
-  translateOffset: 16,
   height: 563,
   width: 1000,
-  borderWidth: 24,
+  borderWidth: 16,
 };
 
 const moveGradient = keyframes`
@@ -25,15 +24,11 @@ const WebcamContainer = styled.div`
 
   display: block;
   margin: 100px auto 0 auto;
-
   height: ${WebcamPosProps.height}px;
   width: ${WebcamPosProps.width}px;
-
   box-sizing: border-box;
-
   padding: var(--border-width);
   position: relative;
-
   background: #00b140;
 
   &::after {
