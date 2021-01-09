@@ -6,6 +6,7 @@ import AppReducer from './AppReducer';
 import MessageQueue from './components/chat';
 import Alerts from './components/alerts';
 import Overlay from './components/overlay';
+import Webcam from './components/webcam';
 import { GlobalStyle } from './styles';
 import { MainframeEvent, ChatWebsocketEvent, AlertWebsocketEvent } from './types';
 
@@ -111,6 +112,9 @@ function App(props: AppProps) {
           </Route>
           <Route path="/overlay">
             <Overlay />
+          </Route>
+          <Route path="/webcam">
+            <Webcam />
           </Route>
         </Switch>
       </Router>
