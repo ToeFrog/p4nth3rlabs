@@ -1,6 +1,14 @@
 import styled, { keyframes } from 'styled-components';
 import { motion } from 'framer-motion';
 
+export const WebcamPosProps = {
+  pantherOffset: -48,
+  translateOffset: 16,
+  height: 563,
+  width: 1000,
+  borderWidth: 24,
+};
+
 const moveGradient = keyframes`
 50% {
   background-position: 100% 50%;
@@ -8,25 +16,25 @@ const moveGradient = keyframes`
 
 const Panther = styled(motion.img)`
   position: absolute;
-  left: -64px;
-  bottom: -64px;
+  left: ${WebcamPosProps.pantherOffset}px;
+  bottom: ${WebcamPosProps.pantherOffset}px;
 `;
 
 const WebcamContainer = styled.div`
-  --border-width: 24px;
+  --border-width: ${WebcamPosProps.borderWidth}px;
 
   display: block;
   margin: 100px auto 0 auto;
 
-  height: 563px;
-  width: 1000px;
+  height: ${WebcamPosProps.height}px;
+  width: ${WebcamPosProps.width}px;
 
   box-sizing: border-box;
 
   padding: var(--border-width);
   position: relative;
 
-  // background: #00b140;
+  background: #00b140;
 
   &::after {
     position: absolute;

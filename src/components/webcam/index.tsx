@@ -1,35 +1,52 @@
-import { WebcamContainer, Panther } from './index.style';
+import { useEffect, useState } from 'react';
+import { WebcamContainer, Panther, WebcamPosProps } from './index.style';
 
-export const getRandomPanther = (): string => {
-  const panthers = ['cool', 'fire', 'heart', 'majick', 'pewpew', 'star'];
+enum Panthers {
+  Cool = 'cool',
+  Fire = 'fire',
+  Heart = 'heart',
+  Majick = 'majick',
+  PewPew = 'pewpew',
+  Star = 'star',
+}
 
+export const getRandomPanther = (currentPanther: string): string => {
+  const panthers = Object.values(Panthers).filter((panther) => panther !== currentPanther);
   return panthers[Math.floor(Math.random() * panthers.length)];
 };
 
-// animate={{
-//   rotate: [-14, -14, -14],
-//   y: [0, 8, 0],
-// }}
-// transition={{
-//   duration: 8,
-//   ease: 'easeInOut',
-//   times: [0, 0.5, 1],
-//   loop: Infinity,
-// }}
-
 export default function Webcam() {
+  const [currentPanther, setCurrentPanther] = useState<string>(Panthers.Cool);
+
+  const translateX = WebcamPosProps.width + WebcamPosProps.translateOffset;
+
+  const translateY = WebcamPosProps.height + WebcamPosProps.translateOffset;
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const newPanther = getRandomPanther(currentPanther);
+      setCurrentPanther(newPanther);
+    }, 60000);
+    return () => clearInterval(interval);
+    // eslint-disable-next-line
+  }, []);
+
   return (
     <WebcamContainer>
       <Panther
-        src="/assets/panthers/cool.png"
+        key={currentPanther}
+        src={`/assets/panthers/${currentPanther}.png`}
         animate={{
-          x: [0, 1032, 1032, 0, 0],
-          y: [0, 0, -595, -595, 0],
+          x: [0, 0, 0, translateX, translateX, 0, 0, 0],
+          y: [0, 0, 0, 0, -translateY, -translateY, 0, 0],
+          scale: [0, 1, 1, 1, 1, 1, 1, 0],
+          rotate: [-360, 0, 0, 0, 0, 0, 0, 360],
         }}
         transition={{
+          delay: 1,
           duration: 3,
           ease: 'easeInOut',
-          times: [0, 0.25, 0.5, 0.75, 1],
+          times: [0, 0.125, 0.175, 0.25, 0.5, 0.75, 0.95, 1],
         }}
       />
     </WebcamContainer>
