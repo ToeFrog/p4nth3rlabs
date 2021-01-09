@@ -29,7 +29,7 @@ const WebcamContainer = styled.div`
   box-sizing: border-box;
   padding: var(--border-width);
   position: relative;
-  background: #00b140;
+  background: #333333;
 
   &::after {
     position: absolute;
