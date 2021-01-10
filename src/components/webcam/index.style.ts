@@ -22,10 +22,10 @@ const highlight = keyframes`
 `;
 
 const WebcamContainer = styled.div`
+  background: transparent;
   --border-width: ${WebcamPosProps.borderWidth}px;
 
   display: block;
-  margin: 100px auto 0 auto;
   height: ${WebcamPosProps.height}px;
   width: ${WebcamPosProps.width}px;
   box-sizing: border-box;
