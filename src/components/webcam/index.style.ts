@@ -4,8 +4,8 @@ import { motion } from 'framer-motion';
 export const WebcamPosProps = {
   pantherOffset: -56,
   pantherAdjust: 18,
-  height: 1013,
-  width: 1800,
+  height: 956,
+  width: 1700,
   borderWidth: 24,
 };
 
