@@ -33,16 +33,34 @@ export default function Webcam() {
         key={currentPanther}
         src={`/assets/panthers/${currentPanther}.png`}
         animate={{
-          x: [0, 0, 0, WebcamPosProps.width, WebcamPosProps.width, 0, 0, 0],
-          y: [0, 0, 0, 0, -WebcamPosProps.height, -WebcamPosProps.height, 0, 0],
+          x: [
+            0,
+            0,
+            0,
+            WebcamPosProps.width - WebcamPosProps.pantherAdjust,
+            WebcamPosProps.width - WebcamPosProps.pantherAdjust,
+            0,
+            0,
+            0,
+          ],
+          y: [
+            0,
+            0,
+            0,
+            0,
+            -WebcamPosProps.height + WebcamPosProps.pantherAdjust,
+            -WebcamPosProps.height + WebcamPosProps.pantherAdjust,
+            0,
+            0,
+          ],
           scale: [0, 1, 1, 1, 1, 1, 1, 0],
-          rotate: [-360, 0, 0, 0, 0, 0, 0, 360],
+          rotate: [-360, 0, 0, 90, 180, -270, 0, 360],
         }}
         transition={{
           delay: 1,
-          duration: 3,
+          duration: 5,
           ease: 'easeInOut',
-          times: [0, 0.125, 0.175, 0.25, 0.5, 0.75, 0.95, 1],
+          times: [0, 0.15, 0.2, 0.4, 0.6, 0.8, 0.95, 1],
         }}
       />
     </WebcamContainer>

@@ -2,21 +2,23 @@ import styled, { keyframes } from 'styled-components';
 import { motion } from 'framer-motion';
 
 export const WebcamPosProps = {
-  pantherOffset: -48,
-  height: 563,
-  width: 1000,
-  borderWidth: 16,
+  pantherOffset: -56,
+  pantherAdjust: 18,
+  height: 1080,
+  width: 1920,
+  borderWidth: 24,
 };
-
-const moveGradient = keyframes`
-50% {
-  background-position: 100% 50%;
-}`;
 
 const Panther = styled(motion.img)`
   position: absolute;
   left: ${WebcamPosProps.pantherOffset}px;
   bottom: ${WebcamPosProps.pantherOffset}px;
+`;
+
+const highlight = keyframes`
+  100% {
+    background-position: 0 0, 0 0;
+  }
 `;
 
 const WebcamContainer = styled.div`
@@ -27,33 +29,19 @@ const WebcamContainer = styled.div`
   height: ${WebcamPosProps.height}px;
   width: ${WebcamPosProps.width}px;
   box-sizing: border-box;
-  padding: var(--border-width);
   position: relative;
-  background: #333333;
-
-  &::after {
-    position: absolute;
-    content: '';
-    top: calc(-1 * var(--border-width));
-    left: calc(-1 * var(--border-width));
-    z-index: -1;
-    width: calc(100% + var(--border-width) * 2);
-    height: calc(100% + var(--border-width) * 2);
-    background: linear-gradient(
-      60deg,
-      hsl(224, 85%, 66%),
-      hsl(269, 85%, 66%),
-      hsl(314, 85%, 66%),
-      hsl(359, 85%, 66%),
-      hsl(44, 85%, 66%),
-      hsl(89, 85%, 66%),
-      hsl(134, 85%, 66%),
-      hsl(179, 85%, 66%)
-    );
-    background-size: 300% 300%;
-    background-position: 0 50%;
-    animation: ${moveGradient} 20s alternate infinite;
-  }
+  border-width: var(--border-width);
+  border-style: solid;
+  border-color: transparent;
+  background-repeat: no-repeat;
+  background-origin: padding-box, border-box;
+  background-image: linear-gradient(white, white),
+    linear-gradient(45deg, var(--vip), var(--yellow) 50%, var(--red));
+  background-repeat: no-repeat;
+  background-size: 100% 100%, 100% 200%;
+  background-position: 0 0, 0 100%;
+  background-origin: padding-box, border-box;
+  animation: ${highlight} 10s infinite alternate;
 `;
 
 export { WebcamContainer, Panther };
