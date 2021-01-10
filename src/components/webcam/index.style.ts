@@ -23,6 +23,7 @@ const WebcamContainer = styled.div`
 `;
 
 const WebcamFrame = styled.div`
+  box-shadow: 0rem 0.6rem 1rem -0.4rem var(--black);
   --border-width: ${WebcamPosProps.borderWidth}px;
   background: transparent;
   display: flex;
