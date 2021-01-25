@@ -79,7 +79,7 @@ function getAlertAudioUrl(type: string) {
 }
 
 export default function Alert(props: AlertProps) {
-  const debug = true;
+  const debug = false;
   let alert = useAlertQueue(props.dispatch);
   if (debug) alert = debugAlert;
   if (!alert) return null;
