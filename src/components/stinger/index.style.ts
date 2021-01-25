@@ -1,6 +1,15 @@
 import styled, { keyframes, css } from "styled-components";
 import { motion } from "framer-motion";
 
+const scrollUpSlowly = keyframes`
+  0% {
+    background-position: center 0;
+  }
+  100% {
+    background-position: center -160px;
+  }
+`;
+
 const slideInRight = keyframes`
   0% {
     transform: translate3d(-100%,0,0);
@@ -91,9 +100,15 @@ const Container = styled.div`
   display: flex;
 `;
 
-const InnerContainer = styled.div`
+interface InnerContainerProps {
+  animationDelay: string | null;
+}
+
+//TODO - animation delay?
+const InnerContainer = styled.div<InnerContainerProps>`
   background-color: var(--black);
   animation: ${slideInRight} 0.3s var(--cb-animation) forwards;
+
   display: flex;
   flex: 1;
   justify-content: center;
@@ -103,18 +118,20 @@ const InnerContainer = styled.div`
 interface BannerProps {
   type: string;
   delay?: string;
+  justifyContent?: string;
 }
 
 const Banner = styled(motion.div)<BannerProps>`
+  box-sizing: border-box;
   width: 100%;
   position: relative;
   display: flex;
-  justify-content: flex-start;
+  justify-content: ${(props) => (props.justifyContent ? props.justifyContent : "flex-start")};
   align-items: center;
   padding: 2rem;
   transform: translate3d(-100%, 0, 0);
   animation: ${slideInRight} 0.5s var(--cb-animation) forwards,
-    ${bounceInRight} 1s var(--cb-animation);
+    ${bounceInRight} 1s var(--cb-animation), ${scrollUpSlowly} 20s var(--cb-animation);
   animation-delay: ${(props) => props.delay}s;
   ${(props) => getBannerBackgroundCss(props.type)}
   ${(props) => getBannerHeight(props.type)}
@@ -129,4 +146,14 @@ const TitleText = styled.h1`
   text-shadow: 0.125rem 0.125rem 6px var(--black);
 `;
 
-export { Container, InnerContainer, Banner, TitleText };
+const Panther = styled.img``;
+
+const StreamerName = styled.h2`
+  font-family: var(--font-family-main);
+  font-size: 3rem;
+  line-height: 1;
+  font-weight: var(--font-weight-bold);
+  color: var(--black);
+`;
+
+export { Container, InnerContainer, Banner, TitleText, Panther, StreamerName };
