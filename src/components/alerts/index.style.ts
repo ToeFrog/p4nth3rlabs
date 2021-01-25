@@ -194,7 +194,7 @@ const AlertNameContainer = styled.h1<AlertNameContainerProps>`
 `;
 
 const AlertName = styled.span`
-  font-family: var(--font-family-alt);
+  font-family: var(--font-family-main);
   font-size: 3rem;
   font-weight: var(--font-weight-bold);
   color: var(--white);

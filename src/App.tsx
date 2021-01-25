@@ -7,6 +7,7 @@ import MessageQueue from './components/chat';
 import Alerts from './components/alerts';
 import Overlay from './components/overlay';
 import Webcam from './components/webcam';
+import Stinger from './components/stinger';
 import { GlobalStyle } from './styles';
 import { MainframeEvent, ChatWebsocketEvent, AlertWebsocketEvent } from './types';
 
@@ -115,6 +116,9 @@ function App(props: AppProps) {
           </Route>
           <Route path="/webcam">
             <Webcam />
+          </Route>
+          <Route path="/stinger">
+            <Stinger />
           </Route>
         </Switch>
       </Router>
