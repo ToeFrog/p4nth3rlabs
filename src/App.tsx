@@ -7,8 +7,14 @@ import MessageQueue from './components/chat';
 import Alerts from './components/alerts';
 import Overlay from './components/overlay';
 import Webcam from './components/webcam';
+import Giveaway from './components/giveaway';
 import { GlobalStyle } from './styles';
-import { MainframeEvent, ChatWebsocketEvent, AlertWebsocketEvent } from './types';
+import {
+  MainframeEvent,
+  ChatWebsocketEvent,
+  AlertWebsocketEvent,
+  GiveawayEntryWebsocketEvent,
+} from './types';
 
 interface AppProps {
   uri: string | undefined;
@@ -82,6 +88,58 @@ function App(props: AppProps) {
           data: dataToPass,
         });
       });
+
+      socket.on(MainframeEvent.entergiveaway, (event: GiveawayEntryWebsocketEvent) => {
+        const dataToPass: any = {
+          type: MainframeEvent.entergiveaway,
+          id: event.id,
+          data: event.data,
+        };
+
+        dispatch({
+          type: MainframeEvent.entergiveaway,
+          data: dataToPass,
+        });
+      });
+
+      socket.on(MainframeEvent.startgiveaway, (event: GiveawayEntryWebsocketEvent) => {
+        const dataToPass: any = {
+          type: MainframeEvent.startgiveaway,
+          id: event.id,
+          data: event.data,
+        };
+
+        dispatch({
+          type: MainframeEvent.startgiveaway,
+          data: dataToPass,
+        });
+      });
+
+      socket.on(MainframeEvent.endgiveaway, (event: GiveawayEntryWebsocketEvent) => {
+        const dataToPass: any = {
+          type: MainframeEvent.endgiveaway,
+          id: event.id,
+          data: event.data,
+        };
+
+        dispatch({
+          type: MainframeEvent.endgiveaway,
+          data: dataToPass,
+        });
+      });
+
+      socket.on(MainframeEvent.drawgiveaway, (event: GiveawayEntryWebsocketEvent) => {
+        const dataToPass: any = {
+          type: MainframeEvent.drawgiveaway,
+          id: event.id,
+          data: event.data,
+        };
+
+        dispatch({
+          type: MainframeEvent.drawgiveaway,
+          data: dataToPass,
+        });
+      });
     }
     return () => {
       // cleanup
@@ -94,6 +152,9 @@ function App(props: AppProps) {
   const initialState: AppState = {
     chatMessages: [],
     alerts: [],
+    giveawayEntries: [],
+    giveawayInProgress: false,
+    giveawayWinner: '',
   };
 
   const [state, dispatch] = useReducer(AppReducer, initialState);
@@ -115,6 +176,9 @@ function App(props: AppProps) {
           </Route>
           <Route path="/webcam">
             <Webcam />
+          </Route>
+          <Route path="/giveaway">
+            <Giveaway />
           </Route>
         </Switch>
       </Router>

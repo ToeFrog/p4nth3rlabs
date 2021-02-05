@@ -1,5 +1,7 @@
 import { ChatMessageEvent } from './components/chat/types';
 import { AlertQueueEvent } from './components/alerts/types';
+import { GiveawayEntryEvent } from './components/giveaway/types';
+
 export interface SocketOptions {
   reconnect: boolean;
 }
@@ -13,7 +15,12 @@ export enum MainframeEvent {
   teammemberjoin = 'teammember',
   chatmessage = 'chatmessage',
   follow = 'follow',
+  startgiveaway = 'startgiveaway',
+  endgiveaway = 'endgiveaway',
+  drawgiveaway = 'drawgiveaway',
+  entergiveaway = 'entergiveaway',
 }
+
 export interface ChatWebsocketEvent {
   broadcaster: string;
   event: MainframeEvent;
@@ -26,6 +33,13 @@ export interface AlertWebsocketEvent {
   event: MainframeEvent;
   id: string;
   data: AlertQueueEvent;
+}
+
+export interface GiveawayEntryWebsocketEvent {
+  broadcaster: string;
+  event: MainframeEvent;
+  id: string;
+  data: GiveawayEntryEvent;
 }
 
 // eslint-disable-next-line no-unused-vars
@@ -44,8 +58,12 @@ export type TrustedEventMap = {
   cheer: Set<Callback>;
   specialuserjoin: Set<Callback>;
   teammemberjoin: Set<Callback>;
-  chatmessage: Set<Callback>;
   follow: Set<Callback>;
+  chatmessage: Set<Callback>;
+  startgiveaway: Set<Callback>;
+  endgiveaway: Set<Callback>;
+  drawgiveaway: Set<Callback>;
+  entergiveaway: Set<Callback>;
 };
 
 export type TrustedEvent = keyof TrustedEventMap;

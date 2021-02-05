@@ -41,6 +41,10 @@ export default class Socket {
       teammemberjoin: new Set(),
       chatmessage: new Set(),
       follow: new Set(),
+      startgiveaway: new Set(),
+      endgiveaway: new Set(),
+      drawgiveaway: new Set(),
+      entergiveaway: new Set(),
     };
   }
 
