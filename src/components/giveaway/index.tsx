@@ -96,9 +96,12 @@ export default function Giveaway(props: GiveawayProps) {
 
   return (
     <>
-      {!giveawayInProgress && (
+      {giveawayInProgress && (
         <>
           <GiveawayEntriesContainer>
+            <audio autoPlay>
+              <source src={process.env.REACT_APP_AUDIO_ALERT_GIVEAWAY_URL} type="audio/mp3" />
+            </audio>
             <GiveawayEntriesInnerContainer>
               <GiveawayTitle>
                 <MajickPanther />
