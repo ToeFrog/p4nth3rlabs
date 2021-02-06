@@ -15,6 +15,7 @@ export interface GiveawayEntryEvent extends GiveawayEvent {
   type: GiveawayEvents.Enter;
   data: {
     username: string;
+    logoUrl: string;
   };
 }
 
