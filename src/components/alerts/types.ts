@@ -3,6 +3,7 @@ export enum AlertNames {
   Raid = 'raid',
   Cheer = 'cheer',
   Sub = 'sub',
+  GiveawayWinner = "giveawaywinner"
 }
 
 export interface AlertQueueEvent {

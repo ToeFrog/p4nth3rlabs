@@ -1,15 +1,15 @@
-import type { AppState } from './AppContext';
-import type { ChatMessageEvent } from './components/chat/types';
-import type { AlertQueueEvent } from './components/alerts/types';
+import type { AppState } from "./AppContext";
+import type { ChatMessageEvent } from "./components/chat/types";
+import type { AlertQueueEvent } from "./components/alerts/types";
 import type {
   GiveawayEntryEvent,
   GiveawayStartEvent,
   GiveawayEndEvent,
-  GiveawayDrawEvent,
-} from './components/giveaway/types';
-import { MaxMessageCount } from './components/chat';
-import { MainframeEvent } from './types';
-import { getTeamMemberIconUrl } from './components/chat/message/utils';
+} from "./components/giveaway/types";
+import { GiveawayEvents } from "./components/giveaway/types";
+import { MaxMessageCount } from "./components/chat";
+import { MainframeEvent } from "./types";
+import { getTeamMemberIconUrl } from "./components/chat/message/utils";
 
 interface AppAction {
   type: string;
@@ -18,15 +18,20 @@ interface AppAction {
     | ChatMessageEvent
     | GiveawayEntryEvent
     | GiveawayStartEvent
-    | GiveawayEndEvent
-    | GiveawayDrawEvent;
+    | GiveawayEndEvent;
+}
+
+function getRandomCongrats() {
+  const congrats = ["Congratulations", "Well done", "You're a winner", "Good work", "Lucky you"];
+
+  return congrats[Math.floor(Math.random() * congrats.length)];
 }
 
 export default function AppReducer(state: AppState, action: AppAction) {
   const newState = { ...state };
 
   switch (action.type) {
-    case 'addChatMessage':
+    case "addChatMessage":
       (action.data as ChatMessageEvent).teamMemberIconUrl = getTeamMemberIconUrl(
         (action.data as ChatMessageEvent).isTeamMember,
       );
@@ -46,7 +51,7 @@ export default function AppReducer(state: AppState, action: AppAction) {
         newState.alerts.push(action.data as AlertQueueEvent);
       }
       return { ...newState };
-    case 'alert_complete':
+    case "alert_complete":
       newState.alerts.shift();
       return { ...newState };
     case MainframeEvent.startgiveaway:
@@ -54,9 +59,24 @@ export default function AppReducer(state: AppState, action: AppAction) {
       return { ...newState };
     case MainframeEvent.endgiveaway:
       newState.giveawayInProgress = false;
+      newState.giveawayEntries = [];
+      newState.giveawayWinner = {
+        type: GiveawayEvents.Enter,
+        id: "",
+        data: {
+          username: "",
+          logoUrl: "",
+        },
+      };
       return { ...newState };
     case MainframeEvent.drawgiveaway:
-      newState.giveawayWinner = (action.data as GiveawayDrawEvent).data.winner;
+      const winner: GiveawayEntryEvent = {
+        data: (action.data as GiveawayEntryEvent).data,
+        type: GiveawayEvents.Enter,
+        id: action.data.id,
+      };
+      newState.giveawayWinner = winner;
+      newState.randomCongrats = getRandomCongrats();
       return { ...newState };
     case MainframeEvent.entergiveaway:
       newState.giveawayEntries.push(action.data as GiveawayEntryEvent);

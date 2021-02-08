@@ -1,23 +1,36 @@
-import React, { useContext } from 'react';
-import AppContext from '../../AppContext';
+import React, { useContext, useState } from "react";
+import AppContext from "../../AppContext";
 import {
   GiveawayEntriesContainer,
   GiveawayEntriesInnerContainer,
+  GiveawayEntriesNameContainer,
   GiveawayTitle,
   GiveawayTitleText,
   Entry,
   EntryLogo,
   EntryName,
-} from './index.style';
-import { GiveawayEvents } from './types';
-import MajickPanther from './svgs/majick';
-import PewPewPanther from './svgs/pewpew';
+} from "./index.style";
+import { GiveawayEvents } from "./types";
+import MajickPanther from "./svgs/majick";
+import PewPewPanther from "./svgs/pewpew";
+
+import {
+  AlertContainer,
+  AlertLogo,
+  AlertNameContainer,
+  AlertName,
+  AlertBanner,
+  AlertContainerInner,
+} from "../alerts/index.style";
+import { AlertNames } from "../alerts/types";
+import BannerImage from "../alerts/svg/bannerImage";
+import BannerTextPath from "../alerts/svg/bannerTextPath";
 
 interface GiveawayProps {}
 
 export default function Giveaway(props: GiveawayProps) {
   const { state } = useContext(AppContext);
-  const { giveawayEntries, giveawayWinner, giveawayInProgress } = state;
+  const { giveawayEntries, giveawayWinner, giveawayInProgress, randomCongrats } = state;
 
   // giveawayEntries.push({
   //   id: Math.random().toString(),
@@ -96,33 +109,64 @@ export default function Giveaway(props: GiveawayProps) {
 
   return (
     <>
+      {!giveawayInProgress && (
+        <div></div>
+        // <audio autoPlay>
+        //   <source src={process.env.REACT_APP_AUDIO_ALERT_GIVEAWAY_URL} type="audio/mp3" />
+        // </audio>
+      )}
       {giveawayInProgress && (
         <>
-          <GiveawayEntriesContainer>
-            <audio autoPlay>
+          <GiveawayEntriesContainer out={!giveawayInProgress}>
+            {/* <audio autoPlay>
               <source src={process.env.REACT_APP_AUDIO_ALERT_GIVEAWAY_URL} type="audio/mp3" />
-            </audio>
+            </audio> */}
             <GiveawayEntriesInnerContainer>
               <GiveawayTitle>
                 <MajickPanther />
                 <GiveawayTitleText>Giveaway in progress!</GiveawayTitleText>
                 <PewPewPanther />
               </GiveawayTitle>
-              {giveawayEntries.map((entry) => (
-                <Entry key={entry.id}>
-                  <EntryLogo src={entry.data.logoUrl} alt={entry.data.username} />
-                  <EntryName>{entry.data.username}</EntryName>
-                </Entry>
-              ))}
+
+              <GiveawayEntriesNameContainer>
+                <>
+                  {giveawayEntries.map((entry) => (
+                    <Entry key={entry.id}>
+                      <EntryLogo src={entry.data.logoUrl} alt={entry.data.username} />
+                      <EntryName>{entry.data.username}</EntryName>
+                    </Entry>
+                  ))}
+                </>
+              </GiveawayEntriesNameContainer>
+
               <GiveawayTitle>
                 <MajickPanther />
-                <GiveawayTitleText>Giveaway in progress!</GiveawayTitleText>
+                <GiveawayTitleText>Type !win in chat to play!</GiveawayTitleText>
                 <PewPewPanther />
               </GiveawayTitle>
             </GiveawayEntriesInnerContainer>
           </GiveawayEntriesContainer>
 
-          {giveawayWinner.length > 0 && <h1>{giveawayWinner}</h1>}
+          {giveawayWinner.data.username && (
+            <AlertContainer key={giveawayWinner.id}>
+              {/* <audio autoPlay>
+                <source src={process.env.REACT_APP_AUDIO_ALERT_GIVEAWAY_URL} type="audio/mp3" />
+              </audio> */}
+              <AlertContainerInner>
+                <AlertLogo src={giveawayWinner.data.logoUrl} alt={giveawayWinner.data.username} />
+                <AlertBanner>
+                  <BannerImage />
+                  <BannerTextPath displayText="Winner!" />
+                </AlertBanner>
+              </AlertContainerInner>
+
+              <AlertNameContainer alertType={AlertNames.GiveawayWinner}>
+                <AlertName>
+                  {randomCongrats}, {giveawayWinner.data.username}!
+                </AlertName>
+              </AlertNameContainer>
+            </AlertContainer>
+          )}
         </>
       )}
     </>

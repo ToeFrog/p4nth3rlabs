@@ -1,20 +1,21 @@
-import React, { useReducer, useEffect } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Socket from './socket';
-import AppContext, { AppState } from './AppContext';
-import AppReducer from './AppReducer';
-import MessageQueue from './components/chat';
-import Alerts from './components/alerts';
-import Overlay from './components/overlay';
-import Webcam from './components/webcam';
-import Giveaway from './components/giveaway';
-import { GlobalStyle } from './styles';
+import React, { useReducer, useEffect } from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Socket from "./socket";
+import AppContext, { AppState } from "./AppContext";
+import AppReducer from "./AppReducer";
+import MessageQueue from "./components/chat";
+import Alerts from "./components/alerts";
+import Overlay from "./components/overlay";
+import Webcam from "./components/webcam";
+import Giveaway from "./components/giveaway";
+import { GiveawayEvents } from "./components/giveaway/types";
+import { GlobalStyle } from "./styles";
 import {
   MainframeEvent,
   ChatWebsocketEvent,
   AlertWebsocketEvent,
   GiveawayEntryWebsocketEvent,
-} from './types';
+} from "./types";
 
 interface AppProps {
   uri: string | undefined;
@@ -32,7 +33,7 @@ function App(props: AppProps) {
 
       socket.on(MainframeEvent.chatmessage, (event: ChatWebsocketEvent) => {
         dispatch({
-          type: 'addChatMessage',
+          type: "addChatMessage",
           data: event.data,
         });
       });
@@ -154,7 +155,15 @@ function App(props: AppProps) {
     alerts: [],
     giveawayEntries: [],
     giveawayInProgress: false,
-    giveawayWinner: '',
+    giveawayWinner: {
+      type: GiveawayEvents.Enter,
+      id: "",
+      data: {
+        username: "",
+        logoUrl: "",
+      },
+    },
+    randomCongrats: "",
   };
 
   const [state, dispatch] = useReducer(AppReducer, initialState);

@@ -1,8 +1,7 @@
 export enum GiveawayEvents {
-  Enter = 'enter',
-  Start = 'start',
-  End = 'end',
-  Draw = 'draw',
+  Enter = "enter",
+  Start = "start",
+  End = "end",
 }
 
 interface GiveawayEvent {
@@ -27,11 +26,4 @@ export interface GiveawayStartEvent extends GiveawayEvent {
 export interface GiveawayEndEvent extends GiveawayEvent {
   type: GiveawayEvents.End;
   data: {};
-}
-
-export interface GiveawayDrawEvent extends GiveawayEvent {
-  type: GiveawayEvents.Draw;
-  data: {
-    winner: string;
-  };
 }

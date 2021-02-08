@@ -1,5 +1,5 @@
-import { AlertNames } from './types';
-import styled, { keyframes, css } from 'styled-components';
+import { AlertNames } from "./types";
+import styled, { keyframes, css } from "styled-components";
 
 const doAnimation = true;
 
@@ -126,7 +126,7 @@ const AlertLogo = styled.img`
         animation: ${growAndRotate} 0.6s var(--cb-animation),
           ${shrinkAndRotateAndUp} 0.5s ease var(--alert-display-time) forwards;
       `
-    : ''}
+    : ""}
 
   margin-left: auto;
   margin-right: auto;
@@ -146,24 +146,27 @@ function getAlertContainerBackgroundCss(alertType: string): any {
   let color;
   switch (alertType) {
     case AlertNames.Follow:
-      color = 'red';
+      color = "red";
       break;
     case AlertNames.Raid:
-      color = 'black';
+      color = "black";
       break;
     case AlertNames.Cheer:
-      color = 'green';
+      color = "green";
       break;
     case AlertNames.Sub:
-      color = 'yellow';
+      color = "yellow";
+      break;
+    case AlertNames.GiveawayWinner:
+      color = "black";
       break;
     default:
-      color = 'red';
+      color = "red";
   }
 
   return css`
     background-color: var(--${color});
-    background-image: url('/assets/bg-${color}.png');
+    background-image: url("/assets/bg-${color}.png");
   `;
 }
 
@@ -178,7 +181,7 @@ const AlertNameContainer = styled.h1<AlertNameContainerProps>`
           ${scrollUpSlowly} 20s var(--cb-animation),
           ${slideOutLeft} 0.5s ease var(--alert-display-time) forwards;
       `
-    : ''}
+    : ""}
   margin-left: auto;
   margin-right: auto;
   display: block;
@@ -207,7 +210,7 @@ const AlertBanner = styled.div`
         animation: ${dropDownBounce} 0.8s ease-in-out,
           ${swoopDown} 0.5s ease var(--alert-display-time) forwards;
       `
-    : ''}
+    : ""}
   width: 100%;
   z-index: 2;
   position: absolute;
