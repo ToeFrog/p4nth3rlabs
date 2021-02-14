@@ -1,14 +1,23 @@
+import { ChatMessageData, CheerPacket, DrawGiveawayPacket, EndGiveawayPacket, EnterGiveawayPacket, FollowPacket, RaidPacket, StartGiveawayPacket, SubPacket, WebSocketPacket } from "p4nth3rb0t-types";
 import { createContext, Dispatch } from "react";
-import type { AlertQueueEvent } from "./components/alerts/types";
-import type { ChatMessageEvent } from "./components/chat/types";
-import type { GiveawayEntryEvent } from "./components/giveaway/types";
+
+export type AlertQueueEvent = CheerPacket | SubPacket | FollowPacket | RaidPacket; 
+export type GiveawayEntryEvent = EnterGiveawayPacket | StartGiveawayPacket | EndGiveawayPacket | DrawGiveawayPacket; 
+
+export interface AlertCompleteAction {
+  event: 'alert_complete';
+  id: 'alert_complete';
+
+}
+
+export type AllActions = WebSocketPacket | AlertCompleteAction;
 
 export interface AppState {
-  chatMessages: ChatMessageEvent[];
+  chatMessages: ChatMessageData[];
   alerts: AlertQueueEvent[];
-  giveawayEntries: GiveawayEntryEvent[];
+  giveawayEntries: EnterGiveawayPacket[];
   giveawayInProgress: boolean;
-  giveawayWinner: GiveawayEntryEvent;
+  giveawayWinner: DrawGiveawayPacket;
   randomCongrats: string;
 }
 

@@ -9,40 +9,41 @@ import {
 } from './index.style';
 import BannerImage from './svg/bannerImage';
 import BannerTextPath from './svg/bannerTextPath';
-import { AlertNames } from './types';
 import { useAlertQueue } from '../../AlertQueue';
 import { debugAlert } from './debug';
+import { AlertQueueEvent } from '../../AppContext';
+import { MainframeEvent } from 'p4nth3rb0t-types';
 
 interface AlertProps {
   dispatch: Dispatch<any>;
 }
 
-function getBannerText(alert: any): any {
-  switch (alert.type) {
-    case AlertNames.Follow:
+function getBannerText(alert: AlertQueueEvent): any {
+  switch (alert.event) {
+    case MainframeEvent.follow:
       return {
         banner: 'New follower',
         footer: alert.data.followerName,
         imgAlt: alert.data.followerName,
         logoUrl: alert.data.logoUrl,
       };
-    case AlertNames.Raid:
+    case MainframeEvent.raid:
       return {
         banner: "It's a raid!",
         footer: `${alert.data.raider} is raiding with ${alert.data.raiderCount} viewers!`,
         imgAlt: alert.data.raider,
         logoUrl: alert.data.logoUrl,
       };
-    case AlertNames.Cheer:
+    case MainframeEvent.cheer:
       return {
         banner: `Bits! Cheers!`,
-        footer: `${alert.data.bitCount} bit${alert.data.bitCount > 1 ? 's' : ''} from ${
+        footer: `${alert.data.bitCount} bit${+alert.data.bitCount > 1 ? 's' : ''} from ${
           alert.data.cheererName
         }!`,
         imgAlt: alert.data.cheererName,
         logoUrl: alert.data.logoUrl,
       };
-    case AlertNames.Sub:
+    case MainframeEvent.sub:
       let tierText =
         alert.data.subTier === 'Prime' ? 'with Twitch Prime' : `at Tier ${alert.data.subTier}`;
       return {
@@ -63,15 +64,15 @@ function getBannerText(alert: any): any {
   }
 }
 
-function getAlertAudioUrl(type: string) {
+function getAlertAudioUrl(type: MainframeEvent) {
   switch (type) {
-    case AlertNames.Follow:
+    case MainframeEvent.follow:
       return process.env.REACT_APP_AUDIO_ALERT_FOLLOW_URL;
-    case AlertNames.Raid:
+    case MainframeEvent.raid:
       return process.env.REACT_APP_AUDIO_ALERT_RAID_URL;
-    case AlertNames.Cheer:
+    case MainframeEvent.cheer:
       return process.env.REACT_APP_AUDIO_ALERT_CHEER_URL;
-    case AlertNames.Sub:
+    case MainframeEvent.sub:
       return process.env.REACT_APP_AUDIO_ALERT_SUB_URL;
     default:
       return process.env.REACT_APP_AUDIO_ALERT_FOLLOW_URL;
@@ -81,10 +82,15 @@ function getAlertAudioUrl(type: string) {
 export default function Alert(props: AlertProps) {
   const debug = false;
   let alert = useAlertQueue(props.dispatch);
-  if (debug) alert = debugAlert;
-  if (!alert) return null;
-  const displayText = debug ? getBannerText(debugAlert) : getBannerText(alert);
-  const alertAudioUrl = getAlertAudioUrl(alert.type);
+  if (debug){
+    alert = debugAlert as any; // todo copy from the other PR
+  }
+
+  if (!alert) {
+    return null;
+  }
+  const displayText = getBannerText(alert);
+  const alertAudioUrl = getAlertAudioUrl(alert.event);
 
   return (
     <AlertContainer key={alert.id}>
@@ -99,7 +105,7 @@ export default function Alert(props: AlertProps) {
         </AlertBanner>
       </AlertContainerInner>
 
-      <AlertNameContainer alertType={alert.type}>
+      <AlertNameContainer alertType={alert.event}>
         <AlertName>{displayText.footer}</AlertName>
       </AlertNameContainer>
     </AlertContainer>

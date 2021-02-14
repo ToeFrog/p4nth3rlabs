@@ -1,3 +1,4 @@
+import { ChatMessageData } from 'p4nth3rb0t-types';
 import React from 'react';
 import {
   ChatMessage,
@@ -8,10 +9,9 @@ import {
 } from './index.style';
 
 import { processChat } from './utils';
-import type { ChatMessageEvent } from '../types';
 
 interface MessageProps {
-  message: ChatMessageEvent;
+  message: ChatMessageData;
 }
 
 export default function Message(props: MessageProps) {
@@ -42,7 +42,7 @@ export default function Message(props: MessageProps) {
       isMod={isMod}
       isTeamMember={isTeamMember}
       isMyFavoriteStreamer={isMyFavoriteStreamer}
-      teamMemberIconUrl={teamMemberIconUrl}
+      teamMemberIconUrl={teamMemberIconUrl ?? ""}
     >
       <AvatarContainer backgroundImage={logoUrl} />
       <MessageContainer>
@@ -54,7 +54,7 @@ export default function Message(props: MessageProps) {
           isMod={isMod}
           isTeamMember={isTeamMember}
           isMyFavoriteStreamer={isMyFavoriteStreamer}
-          teamMemberIconUrl={teamMemberIconUrl}
+          teamMemberIconUrl={teamMemberIconUrl ?? ""}
         >
           @{displayName}
         </DisplayName>

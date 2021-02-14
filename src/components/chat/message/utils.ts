@@ -1,5 +1,6 @@
-import type { ChatMessageEvent, ConstructedEmote } from '../types';
+import type { ConstructedEmote } from '../types';
 import sanitizeHtml from 'sanitize-html';
+import { ChatMessageData } from 'p4nth3rb0t-types';
 
 export const getTeamMemberIconUrl = (isTeamMember: boolean): string => {
   const teamMemberIconUrls = [
@@ -14,7 +15,7 @@ export const getTeamMemberIconUrl = (isTeamMember: boolean): string => {
     : '';
 };
 
-export function processChat(chat_event: ChatMessageEvent) {
+export function processChat(chat_event: ChatMessageData) {
   let tempMessage: string = chat_event.message.replace(/<img/g, '<DEL');
 
   const emotes: any[] = [];

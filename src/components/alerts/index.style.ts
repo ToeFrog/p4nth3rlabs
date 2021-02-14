@@ -1,5 +1,5 @@
-import { AlertNames } from "./types";
 import styled, { keyframes, css } from "styled-components";
+import { MainframeEvent } from "p4nth3rb0t-types";
 
 const doAnimation = true;
 
@@ -142,22 +142,22 @@ const AlertLogo = styled.img`
   border: 0.5rem solid var(--yellow);
 `;
 
-function getAlertContainerBackgroundCss(alertType: string): any {
+function getAlertContainerBackgroundCss(alertType: MainframeEvent): any {
   let color;
   switch (alertType) {
-    case AlertNames.Follow:
+    case MainframeEvent.follow:
       color = "red";
       break;
-    case AlertNames.Raid:
+    case MainframeEvent.raid:
       color = "black";
       break;
-    case AlertNames.Cheer:
+    case MainframeEvent.cheer:
       color = "green";
       break;
-    case AlertNames.Sub:
+    case MainframeEvent.sub:
       color = "yellow";
       break;
-    case AlertNames.GiveawayWinner:
+    case MainframeEvent.drawGiveaway:
       color = "black";
       break;
     default:
@@ -171,7 +171,7 @@ function getAlertContainerBackgroundCss(alertType: string): any {
 }
 
 interface AlertNameContainerProps {
-  alertType: string;
+  alertType: MainframeEvent;
 }
 
 const AlertNameContainer = styled.h1<AlertNameContainerProps>`

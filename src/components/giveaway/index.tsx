@@ -10,7 +10,6 @@ import {
   EntryLogo,
   EntryName,
 } from "./index.style";
-import { GiveawayEvents } from "./types";
 import MajickPanther from "./svgs/majick";
 import PewPewPanther from "./svgs/pewpew";
 
@@ -22,9 +21,9 @@ import {
   AlertBanner,
   AlertContainerInner,
 } from "../alerts/index.style";
-import { AlertNames } from "../alerts/types";
 import BannerImage from "../alerts/svg/bannerImage";
 import BannerTextPath from "../alerts/svg/bannerTextPath";
+import { MainframeEvent } from "p4nth3rb0t-types";
 
 interface GiveawayProps {}
 
@@ -147,22 +146,22 @@ export default function Giveaway(props: GiveawayProps) {
             </GiveawayEntriesInnerContainer>
           </GiveawayEntriesContainer>
 
-          {giveawayWinner.data.username && (
+          {giveawayWinner.data.winner && (
             <AlertContainer key={giveawayWinner.id}>
               {/* <audio autoPlay>
                 <source src={process.env.REACT_APP_AUDIO_ALERT_GIVEAWAY_URL} type="audio/mp3" />
               </audio> */}
               <AlertContainerInner>
-                <AlertLogo src={giveawayWinner.data.logoUrl} alt={giveawayWinner.data.username} />
+                <AlertLogo src={giveawayWinner.data.logoUrl} alt={giveawayWinner.data.winner} />
                 <AlertBanner>
                   <BannerImage />
                   <BannerTextPath displayText="Winner!" />
                 </AlertBanner>
               </AlertContainerInner>
 
-              <AlertNameContainer alertType={AlertNames.GiveawayWinner}>
+              <AlertNameContainer alertType={MainframeEvent.drawGiveaway}>
                 <AlertName>
-                  {randomCongrats}, {giveawayWinner.data.username}!
+                  {randomCongrats}, {giveawayWinner.data.winner}!
                 </AlertName>
               </AlertNameContainer>
             </AlertContainer>
