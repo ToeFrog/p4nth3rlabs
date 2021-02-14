@@ -1,5 +1,12 @@
 /* eslint-disable object-curly-newline */
-import type { SocketOptions, Callback, TrustedEventMap, TrustedEvent } from './types';
+import { WebSocketPacket } from "p4nth3rb0t-types";
+import type {
+  SocketOptions,
+  Callback,
+  TrustedEventMap,
+  TrustedEvent,
+  TypedPacketCallback,
+} from "./types";
 
 const EVENT_CODES = {
   NORMAL_CLOSURE: 1000,
@@ -14,6 +21,8 @@ export default class Socket {
   connected: boolean;
 
   methods: TrustedEventMap;
+
+  packetCallbacks = new Set<TypedPacketCallback>();
 
   connection: WebSocket;
 
@@ -32,15 +41,22 @@ export default class Socket {
       close: new Set(),
       error: new Set(),
       sub: new Set(),
-      giftsub: new Set(),
-      join: new Set(),
-      message: new Set(),
+      teamMemberJoin: new Set(),
       raid: new Set(),
       cheer: new Set(),
-      specialuserjoin: new Set(),
-      teammemberjoin: new Set(),
-      chatmessage: new Set(),
+      imageDrop: new Set(),
+      specialUserJoin: new Set(),
+      chatMessage: new Set(),
       follow: new Set(),
+      startGiveaway: new Set(),
+      endGiveaway: new Set(),
+      drawGiveaway: new Set(),
+      enterGiveaway: new Set(),
+      dropUser: new Set(),
+      weather: new Set(),
+      dropEmotes: new Set(),
+      weatherTrailEvent: new Set(),
+      yeetUser: new Set(),
     };
   }
 
@@ -89,27 +105,39 @@ export default class Socket {
     });
   }
 
-  parseIncoming(event: any) {
-    const json: any = JSON.parse(event.data);
-    let evt: TrustedEvent = 'raw';
+  parseIncoming(event: MessageEvent) {
+    const json: WebSocketPacket = JSON.parse(event.data);
+    let evt: TrustedEvent | null = null;
 
-    if (json && typeof json === 'object' && typeof json.event === 'string') {
-      evt = json.event.toLowerCase();
+    if (json && typeof json === "object" && typeof json.event === "string") {
+      evt = json.event.toLowerCase() as TrustedEvent;
     }
+
+    if (!evt) {
+      return;
+    }
+
+    this.packetCallbacks.forEach((callback) => callback(json));
 
     let callbacks = this.methods[evt];
 
-    if (!callbacks) callbacks = this.methods.raw;
+    if (!callbacks) {
+      return;
+    }
 
     callbacks.forEach((func) => {
       if (event.target === this.connection) {
-        func(JSON.parse(event.data));
+        func(json);
       }
     });
   }
 
   on(event: TrustedEvent, callback: Callback) {
     this.methods[event].add(callback);
+  }
+
+  onPacket(callback: TypedPacketCallback) {
+    this.packetCallbacks.add(callback);
   }
 
   reconnect() {
@@ -121,6 +149,6 @@ export default class Socket {
   }
 
   disconnect() {
-    this.connection.close(EVENT_CODES.NORMAL_CLOSURE, 'Disconnect');
+    this.connection.close(EVENT_CODES.NORMAL_CLOSURE, "Disconnect");
   }
 }

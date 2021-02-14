@@ -1,5 +1,5 @@
-import { AlertNames } from './types';
-import styled, { keyframes, css } from 'styled-components';
+import styled, { keyframes, css } from "styled-components";
+import { MainframeEvent } from "p4nth3rb0t-types";
 
 const doAnimation = true;
 
@@ -126,7 +126,7 @@ const AlertLogo = styled.img`
         animation: ${growAndRotate} 0.6s var(--cb-animation),
           ${shrinkAndRotateAndUp} 0.5s ease var(--alert-display-time) forwards;
       `
-    : ''}
+    : ""}
 
   margin-left: auto;
   margin-right: auto;
@@ -142,33 +142,36 @@ const AlertLogo = styled.img`
   border: 0.5rem solid var(--yellow);
 `;
 
-function getAlertContainerBackgroundCss(alertType: string): any {
+function getAlertContainerBackgroundCss(alertType: MainframeEvent): any {
   let color;
   switch (alertType) {
-    case AlertNames.Follow:
-      color = 'red';
+    case MainframeEvent.follow:
+      color = "red";
       break;
-    case AlertNames.Raid:
-      color = 'black';
+    case MainframeEvent.raid:
+      color = "black";
       break;
-    case AlertNames.Cheer:
-      color = 'green';
+    case MainframeEvent.cheer:
+      color = "green";
       break;
-    case AlertNames.Sub:
-      color = 'yellow';
+    case MainframeEvent.sub:
+      color = "yellow";
+      break;
+    case MainframeEvent.drawGiveaway:
+      color = "black";
       break;
     default:
-      color = 'red';
+      color = "red";
   }
 
   return css`
     background-color: var(--${color});
-    background-image: url('/assets/bg-${color}.png');
+    background-image: url("/assets/bg-${color}.png");
   `;
 }
 
 interface AlertNameContainerProps {
-  alertType: string;
+  alertType: MainframeEvent;
 }
 
 const AlertNameContainer = styled.h1<AlertNameContainerProps>`
@@ -178,7 +181,7 @@ const AlertNameContainer = styled.h1<AlertNameContainerProps>`
           ${scrollUpSlowly} 20s var(--cb-animation),
           ${slideOutLeft} 0.5s ease var(--alert-display-time) forwards;
       `
-    : ''}
+    : ""}
   margin-left: auto;
   margin-right: auto;
   display: block;
@@ -207,7 +210,7 @@ const AlertBanner = styled.div`
         animation: ${dropDownBounce} 0.8s ease-in-out,
           ${swoopDown} 0.5s ease var(--alert-display-time) forwards;
       `
-    : ''}
+    : ""}
   width: 100%;
   z-index: 2;
   position: absolute;

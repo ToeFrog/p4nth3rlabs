@@ -1,14 +1,15 @@
-import React, { useReducer, useEffect } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Socket from './socket';
-import AppContext, { AppState } from './AppContext';
-import AppReducer from './AppReducer';
-import MessageQueue from './components/chat';
-import Alerts from './components/alerts';
-import Overlay from './components/overlay';
-import Webcam from './components/webcam';
-import { GlobalStyle } from './styles';
-import { MainframeEvent, ChatWebsocketEvent, AlertWebsocketEvent } from './types';
+import React, { useReducer, useEffect } from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Socket from "./socket";
+import AppContext, { AppState } from "./AppContext";
+import AppReducer from "./AppReducer";
+import MessageQueue from "./components/chat";
+import Alerts from "./components/alerts";
+import Overlay from "./components/overlay";
+import Webcam from "./components/webcam";
+import Giveaway from "./components/giveaway";
+import { GlobalStyle } from "./styles";
+import { WebSocketPacket } from "p4nth3rb0t-types";
 
 interface AppProps {
   uri: string | undefined;
@@ -18,69 +19,14 @@ function App(props: AppProps) {
   const { uri } = props;
 
   useEffect(() => {
-    let socket: any;
+    let socket: Socket;
     if (uri && uri.length > 0) {
       socket = new Socket(uri, {
         reconnect: true,
       });
 
-      socket.on(MainframeEvent.chatmessage, (event: ChatWebsocketEvent) => {
-        dispatch({
-          type: 'addChatMessage',
-          data: event.data,
-        });
-      });
-
-      socket.on(MainframeEvent.raid, (event: AlertWebsocketEvent) => {
-        const dataToPass: any = {
-          type: MainframeEvent.raid,
-          id: event.id,
-          data: event.data,
-        };
-
-        dispatch({
-          type: MainframeEvent.raid,
-          data: dataToPass,
-        });
-      });
-
-      socket.on(MainframeEvent.sub, (event: AlertWebsocketEvent) => {
-        const dataToPass: any = {
-          type: MainframeEvent.sub,
-          id: event.id,
-          data: event.data,
-        };
-
-        dispatch({
-          type: MainframeEvent.sub,
-          data: dataToPass,
-        });
-      });
-
-      socket.on(MainframeEvent.cheer, (event: AlertWebsocketEvent) => {
-        const dataToPass: any = {
-          type: MainframeEvent.cheer,
-          id: event.id,
-          data: event.data,
-        };
-
-        dispatch({
-          type: MainframeEvent.cheer,
-          data: dataToPass,
-        });
-      });
-
-      socket.on(MainframeEvent.follow, (event: AlertWebsocketEvent) => {
-        const dataToPass: any = {
-          type: MainframeEvent.follow,
-          id: event.id,
-          data: event.data,
-        };
-
-        dispatch({
-          type: MainframeEvent.follow,
-          data: dataToPass,
-        });
+      socket.onPacket((event: WebSocketPacket) => {
+        dispatch(event);
       });
     }
     return () => {
@@ -94,6 +40,8 @@ function App(props: AppProps) {
   const initialState: AppState = {
     chatMessages: [],
     alerts: [],
+    giveawayEntries: [],
+    giveawayInProgress: false,
   };
 
   const [state, dispatch] = useReducer(AppReducer, initialState);
@@ -115,6 +63,9 @@ function App(props: AppProps) {
           </Route>
           <Route path="/webcam">
             <Webcam />
+          </Route>
+          <Route path="/giveaway">
+            <Giveaway />
           </Route>
         </Switch>
       </Router>

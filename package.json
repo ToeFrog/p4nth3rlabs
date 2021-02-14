@@ -10,6 +10,7 @@
     "@types/sanitize-html": "^1.27.0",
     "@types/styled-components": "^5.1.4",
     "framer-motion": "^2.9.5",
+    "p4nth3rb0t-types": "github:whitep4nth3r/p4nth3rb0t-types#f2a73d4c9fa7e6b1ac0af3223a5e82e69557b455",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-router-dom": "^5.2.0",

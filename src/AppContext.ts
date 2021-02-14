@@ -1,10 +1,37 @@
-import { createContext, Dispatch } from 'react';
-import type { AlertQueueEvent } from './components/alerts/types';
-import type { ChatMessageEvent } from './components/chat/types';
+import {
+  ChatMessageData,
+  CheerPacket,
+  DrawGiveawayPacket,
+  EndGiveawayPacket,
+  EnterGiveawayPacket,
+  FollowPacket,
+  RaidPacket,
+  StartGiveawayPacket,
+  SubPacket,
+  WebSocketPacket,
+} from "p4nth3rb0t-types";
+import { createContext, Dispatch } from "react";
+
+export type AlertQueueEvent =
+  | CheerPacket
+  | SubPacket
+  | FollowPacket
+  | RaidPacket
+  | DrawGiveawayPacket;
+export type GiveawayEntryEvent = EnterGiveawayPacket | StartGiveawayPacket | EndGiveawayPacket;
+
+export interface AlertCompleteAction {
+  event: "alert_complete";
+  id: "alert_complete";
+}
+
+export type AllActions = WebSocketPacket | AlertCompleteAction;
 
 export interface AppState {
-  chatMessages: ChatMessageEvent[];
+  chatMessages: ChatMessageData[];
   alerts: AlertQueueEvent[];
+  giveawayEntries: EnterGiveawayPacket[];
+  giveawayInProgress: boolean;
 }
 
 interface AppContextProps {
