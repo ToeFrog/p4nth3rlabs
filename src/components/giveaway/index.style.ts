@@ -51,16 +51,6 @@ const GiveawayEntriesInnerContainer = styled.div`
   overflow: hidden;
 `;
 
-const scrollEntries = keyframes`
-    0% {
-      transform: translateY(0);
-    }
-
-    100% {
-      transform: translateY(-100%);
-    }
-`;
-
 const GiveawayEntriesNameContainer = styled.div`
   display: flex;
   flex-direction: column;
