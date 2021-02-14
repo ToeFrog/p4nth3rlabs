@@ -44,6 +44,7 @@ export default class Socket {
       teamMemberJoin: new Set(),
       raid: new Set(),
       cheer: new Set(),
+      imageDrop: new Set(),
       specialUserJoin: new Set(),
       chatMessage: new Set(),
       follow: new Set(),
