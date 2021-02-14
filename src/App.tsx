@@ -9,7 +9,7 @@ import Overlay from "./components/overlay";
 import Webcam from "./components/webcam";
 import Giveaway from "./components/giveaway";
 import { GlobalStyle } from "./styles";
-import { MainframeEvent, WebSocketPacket} from 'p4nth3rb0t-types';
+import { MainframeEvent, WebSocketPacket } from "p4nth3rb0t-types";
 
 interface AppProps {
   uri: string | undefined;
@@ -27,7 +27,7 @@ function App(props: AppProps) {
 
       socket.onPacket((event: WebSocketPacket) => {
         dispatch(event);
-      })
+      });
     }
     return () => {
       // cleanup
@@ -42,15 +42,6 @@ function App(props: AppProps) {
     alerts: [],
     giveawayEntries: [],
     giveawayInProgress: false,
-    giveawayWinner: {
-      id: "",
-      event: MainframeEvent.drawGiveaway,
-      data: {
-        winner: "",
-        logoUrl: "",
-      }
-    },
-    randomCongrats: "",
   };
 
   const [state, dispatch] = useReducer(AppReducer, initialState);

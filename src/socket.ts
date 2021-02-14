@@ -1,6 +1,12 @@
 /* eslint-disable object-curly-newline */
-import { WebSocketPacket } from 'p4nth3rb0t-types';
-import type { SocketOptions, Callback, TrustedEventMap, TrustedEvent, TypedPacketCallback } from './types';
+import { WebSocketPacket } from "p4nth3rb0t-types";
+import type {
+  SocketOptions,
+  Callback,
+  TrustedEventMap,
+  TrustedEvent,
+  TypedPacketCallback,
+} from "./types";
 
 const EVENT_CODES = {
   NORMAL_CLOSURE: 1000,
@@ -28,7 +34,6 @@ export default class Socket {
 
     this.connection = new WebSocket(this.uri);
     this.createConnection();
-    
 
     this.methods = {
       raw: new Set(),
@@ -36,7 +41,7 @@ export default class Socket {
       close: new Set(),
       error: new Set(),
       sub: new Set(),
-      teammemberJoin: new Set(),
+      teamMemberJoin: new Set(),
       raid: new Set(),
       cheer: new Set(),
       specialUserJoin: new Set(),
@@ -50,7 +55,7 @@ export default class Socket {
       weather: new Set(),
       dropEmotes: new Set(),
       weatherTrailEvent: new Set(),
-      yeetUser: new Set()
+      yeetUser: new Set(),
     };
   }
 
@@ -101,9 +106,9 @@ export default class Socket {
 
   parseIncoming(event: MessageEvent) {
     const json: WebSocketPacket = JSON.parse(event.data);
-    let evt: TrustedEvent | null = null; 
+    let evt: TrustedEvent | null = null;
 
-    if (json && typeof json === 'object' && typeof json.event === 'string') {
+    if (json && typeof json === "object" && typeof json.event === "string") {
       evt = json.event.toLowerCase() as TrustedEvent;
     }
 
@@ -111,7 +116,7 @@ export default class Socket {
       return;
     }
 
-    this.packetCallbacks.forEach(callback => callback(json))
+    this.packetCallbacks.forEach((callback) => callback(json));
 
     let callbacks = this.methods[evt];
 
@@ -143,6 +148,6 @@ export default class Socket {
   }
 
   disconnect() {
-    this.connection.close(EVENT_CODES.NORMAL_CLOSURE, 'Disconnect');
+    this.connection.close(EVENT_CODES.NORMAL_CLOSURE, "Disconnect");
   }
 }

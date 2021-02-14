@@ -1,5 +1,4 @@
-import {WebSocketPacket, MainframeEvent} from 'p4nth3rb0t-types';
-
+import { WebSocketPacket, MainframeEvent } from "p4nth3rb0t-types";
 
 export interface SocketOptions {
   reconnect: boolean;
@@ -14,11 +13,11 @@ export enum AdditionalWebSocketTypes {
   raw = "raw",
   error = "error",
   close = "close",
-  open = "open"
+  open = "open",
 }
 
 export type TrustedEventMap = {
-  [key in keyof typeof  MainframeEvent|AdditionalWebSocketTypes]: Set<Callback>;
+  [key in keyof typeof MainframeEvent | AdditionalWebSocketTypes]: Set<Callback>;
 };
 
 export type TrustedEvent = keyof TrustedEventMap;
