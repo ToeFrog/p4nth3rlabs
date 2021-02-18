@@ -1,8 +1,8 @@
 export default function MajickPanther() {
   return (
     <svg
-      width="24"
-      height="24"
+      width="32"
+      height="32"
       viewBox="0 0 800 800"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

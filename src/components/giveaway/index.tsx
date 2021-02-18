@@ -9,11 +9,26 @@ import {
   Entry,
   EntryLogo,
   EntryName,
+  PantherContainer,
 } from "./index.style";
 import MajickPanther from "./svgs/majick";
 import PewPewPanther from "./svgs/pewpew";
 
 interface GiveawayProps {}
+
+function getRandomLuckMessage(username: string): string {
+  const messages = [
+    `Good luck, ${username}!`,
+    `You can do it, ${username}!`,
+    `You're a winner, ${username}!`,
+    `Go go go, ${username}!`,
+    `In it to win it, ${username}!`,
+    `[object Object], ${username}!`,
+    `Win win win, ${username}!`,
+  ];
+
+  return messages[Math.floor(Math.random() * messages.length)];
+}
 
 export default function Giveaway(props: GiveawayProps) {
   const { state } = useContext(AppContext);
@@ -33,9 +48,13 @@ export default function Giveaway(props: GiveawayProps) {
           </audio>
           <GiveawayEntriesInnerContainer>
             <GiveawayTitle>
-              <MajickPanther />
-              <GiveawayTitleText>Giveaway in progress!</GiveawayTitleText>
-              <PewPewPanther />
+              <PantherContainer>
+                <MajickPanther />
+              </PantherContainer>
+              <GiveawayTitleText>Win a JetBrains License!</GiveawayTitleText>
+              <PantherContainer>
+                <MajickPanther />
+              </PantherContainer>
             </GiveawayTitle>
 
             <GiveawayEntriesNameContainer>
@@ -43,16 +62,20 @@ export default function Giveaway(props: GiveawayProps) {
                 {giveawayEntries.map((entry) => (
                   <Entry key={entry.id}>
                     <EntryLogo src={entry.data.logoUrl} alt={entry.data.username} />
-                    <EntryName>{entry.data.username}</EntryName>
+                    <EntryName>{getRandomLuckMessage(entry.data.username)}</EntryName>
                   </Entry>
                 ))}
               </>
             </GiveawayEntriesNameContainer>
 
             <GiveawayTitle>
-              <MajickPanther />
+              <PantherContainer>
+                <PewPewPanther />
+              </PantherContainer>
               <GiveawayTitleText>Type !win in chat to play!</GiveawayTitleText>
-              <PewPewPanther />
+              <PantherContainer>
+                <PewPewPanther />
+              </PantherContainer>
             </GiveawayTitle>
           </GiveawayEntriesInnerContainer>
         </GiveawayEntriesContainer>

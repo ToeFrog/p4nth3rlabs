@@ -57,19 +57,206 @@ const GiveawayEntriesNameContainer = styled.div`
   align-self: flex-end;
 `;
 
-const blinker = keyframes`
+const bounce = keyframes`
+  0% { 
+    transform: translateY(-7px); 
+  }
+  1% {
+    transform: translateY(7px); 
+  }
+  2% {
+    transform: translateY(-3px); 
+  }
+  4% {
+    transform: translateY(3px); 
+  }
+  5% {
+    transform: translateY(-1px); 
+  }
+  6% {
+    transform: translateY(1px); 
+  }
+  7% {
+    transform: translateY(-3px); 
+  }
+  8% {
+    transform: translateY(3px); 
+  }
+  9% {
+    transform: translateY(7px); 
+  }
+  10% {
+    transform: translateY(-7px); 
+  }
+  11% {
+    transform: translateY(0); 
+  }
+  100% {
+    transform: translateY(0); 
+  }
+`;
+
+const shake = keyframes`
+  2% {
+    transform: translate(1px, 1px) rotate(0.5deg);
+  }
+  4% {
+    transform: translate(0px, 1px) rotate(0.5deg);
+  }
+  6% {
+    transform: translate(0px, 1px) rotate(0.5deg);
+  }
+  8% {
+    transform: translate(1px, 0px) rotate(0.5deg);
+  }
+  10% {
+    transform: translate(0px, 0px) rotate(0.5deg);
+  }
+  12% {
+    transform: translate(1px, 0px) rotate(0.5deg);
+  }
+  14% {
+    transform: translate(1px, 0px) rotate(0.5deg);
+  }
+  16% {
+    transform: translate(0px, 1px) rotate(0.5deg);
+  }
+  18% {
+    transform: translate(0px, 1px) rotate(0.5deg);
+  }
+  20% {
+    transform: translate(0px, 1px) rotate(0.5deg);
+  }
+  22% {
+    transform: translate(0px, 1px) rotate(0.5deg);
+  }
+  24% {
+    transform: translate(0px, 0px) rotate(0.5deg);
+  }
+  26% {
+    transform: translate(1px, 1px) rotate(0.5deg);
+  }
+  28% {
+    transform: translate(1px, 1px) rotate(0.5deg);
+  }
+  30% {
+    transform: translate(1px, 1px) rotate(0.5deg);
+  }
+  32% {
+    transform: translate(1px, 0px) rotate(0.5deg);
+  }
+  34% {
+    transform: translate(0px, 1px) rotate(0.5deg);
+  }
+  36% {
+    transform: translate(0px, 1px) rotate(0.5deg);
+  }
+  38% {
+    transform: translate(1px, 1px) rotate(0.5deg);
+  }
+  40% {
+    transform: translate(1px, 1px) rotate(0.5deg);
+  }
+  42% {
+    transform: translate(1px, 1px) rotate(0.5deg);
+  }
+  44% {
+    transform: translate(1px, 1px) rotate(0.5deg);
+  }
+  46% {
+    transform: translate(1px, 0px) rotate(0.5deg);
+  }
+  48% {
+    transform: translate(1px, 1px) rotate(0.5deg);
+  }
   50% {
-    opacity: 0;
+    transform: translate(1px, 1px) rotate(0.5deg);
+  }
+  52% {
+    transform: translate(1px, 0px) rotate(0.5deg);
+  }
+  54% {
+    transform: translate(0px, 1px) rotate(0.5deg);
+  }
+  56% {
+    transform: translate(0px, 0px) rotate(0.5deg);
+  }
+  58% {
+    transform: translate(0px, 0px) rotate(0.5deg);
+  }
+  60% {
+    transform: translate(1px, 1px) rotate(0.5deg);
+  }
+  62% {
+    transform: translate(0px, 0px) rotate(0.5deg);
+  }
+  64% {
+    transform: translate(1px, 0px) rotate(0.5deg);
+  }
+  66% {
+    transform: translate(1px, 1px) rotate(0.5deg);
+  }
+  68% {
+    transform: translate(1px, 0px) rotate(0.5deg);
+  }
+  70% {
+    transform: translate(1px, 1px) rotate(0.5deg);
+  }
+  72% {
+    transform: translate(0px, 0px) rotate(0.5deg);
+  }
+  74% {
+    transform: translate(1px, 0px) rotate(0.5deg);
+  }
+  76% {
+    transform: translate(0px, 1px) rotate(0.5deg);
+  }
+  78% {
+    transform: translate(1px, 1px) rotate(0.5deg);
+  }
+  80% {
+    transform: translate(0px, 0px) rotate(0.5deg);
+  }
+  82% {
+    transform: translate(1px, 0px) rotate(0.5deg);
+  }
+  84% {
+    transform: translate(0px, 0px) rotate(0.5deg);
+  }
+  86% {
+    transform: translate(1px, 1px) rotate(0.5deg);
+  }
+  88% {
+    transform: translate(1px, 1px) rotate(0.5deg);
+  }
+  90% {
+    transform: translate(1px, 1px) rotate(0.5deg);
+  }
+  92% {
+    transform: translate(0px, 0px) rotate(0.5deg);
+  }
+  94% {
+    transform: translate(1px, 1px) rotate(0.5deg);
+  }
+  96% {
+    transform: translate(0px, 1px) rotate(0.5deg);
+  }
+  98% {
+    transform: translate(0px, 0px) rotate(0.5deg);
+  }
+  0%,
+  100% {
+    transform: translate(0, 0) rotate(0);
   }
 `;
 
 const GiveawayTitle = styled.div`
-  animation: ${blinker} 1s linear infinite;
   margin-right: 1rem;
   display: flex;
   align-items: center;
   flex-direction: row;
   justify-content: space-between;
+  animation: ${bounce} 10s linear infinite;
 `;
 
 const GiveawayTitleText = styled.h1`
@@ -106,6 +293,13 @@ const EntryName = styled.span`
   font-family: var(--font-family-main);
 `;
 
+const PantherContainer = styled.span`
+  animation: ${shake};
+  animation-duration: 10s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+`;
+
 export {
   GiveawayEntriesContainer,
   GiveawayEntriesInnerContainer,
@@ -115,4 +309,5 @@ export {
   Entry,
   EntryLogo,
   EntryName,
+  PantherContainer,
 };
