@@ -8,7 +8,7 @@ const MessageQueue = styled.div<MessageQueueProps>`
   position: fixed;
   left: 0;
   bottom: 140px;
-  width: 400px;
+  width: 555px;
   z-index: 2;
 `;
 

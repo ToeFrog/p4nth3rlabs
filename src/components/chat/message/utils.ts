@@ -4,10 +4,9 @@ import { ChatMessageData } from 'p4nth3rb0t-types';
 
 export const getTeamMemberIconUrl = (isTeamMember: boolean): string => {
   const teamMemberIconUrls = [
-    'https://static-cdn.jtvnw.net/emoticons/v2/302880696/default/dark/3.0',
-    'https://static-cdn.jtvnw.net/emoticons/v2/303132137/default/dark/3.0',
-    'https://static-cdn.jtvnw.net/emoticons/v2/303132133/default/dark/3.0',
-    'https://static-cdn.jtvnw.net/emoticons/v2/302880702/default/dark/3.0',
+    'https://static-cdn.jtvnw.net/emoticons/v2/306148473/default/dark/3.0',
+    'https://static-cdn.jtvnw.net/emoticons/v2/306148465/default/dark/3.0',
+    'https://static-cdn.jtvnw.net/emoticons/v2/306148462/default/dark/3.0',
   ];
 
   return isTeamMember

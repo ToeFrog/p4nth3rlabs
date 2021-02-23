@@ -5,7 +5,6 @@ interface ChatMessageProps {
   isBroadcaster: boolean;
   isVip: boolean;
   isMod: boolean;
-  isMyFavoriteStreamer: boolean,
   isTeamMember: boolean;
   teamMemberIconUrl: string;
 }
@@ -37,27 +36,27 @@ const slideOutLeft = keyframes`
   }
 `;
 
-const renderSubscriberAfter = css`
-  content: '';
-  position: absolute;
-  right: -4px;
-  bottom: -13px;
-  transform: rotate(45deg);
-  border-top: 20px solid transparent;
-  border-bottom: 20px solid transparent;
-  border-left: 20px solid var(--yellow);
-`;
+// const renderSubscriberAfter = css`
+//   content: '';
+//   position: absolute;
+//   right: -4px;
+//   bottom: -13px;
+//   transform: rotate(45deg);
+//   border-top: 20px solid transparent;
+//   border-bottom: 20px solid transparent;
+//   border-left: 20px solid var(--yellow);
+// `;
 
-const renderBroadcasterAfter = css`
-  content: '';
-  position: absolute;
-  right: -4px;
-  bottom: -13px;
-  transform: rotate(45deg);
-  border-top: 20px solid transparent;
-  border-bottom: 20px solid transparent;
-  border-left: 20px solid var(--broadcaster);
-`;
+// const renderBroadcasterAfter = css`
+//   content: '';
+//   position: absolute;
+//   right: -4px;
+//   bottom: -13px;
+//   transform: rotate(45deg);
+//   border-top: 20px solid transparent;
+//   border-bottom: 20px solid transparent;
+//   border-left: 20px solid var(--broadcaster);
+// `;
 
 const renderIsTeamMemberBefore = (imgUrl: string | undefined) => {
   if (imgUrl !== undefined) {
@@ -65,9 +64,8 @@ const renderIsTeamMemberBefore = (imgUrl: string | undefined) => {
       &:before {
         content: url('${imgUrl}');
         position: absolute;
-        bottom: -12px;
-        right: -10px;
-        transform: rotate(-60deg);
+        bottom: -23px;
+        right: 5px;
         opacity: 0.4;
         z-index: 1;
       }
@@ -76,19 +74,15 @@ const renderIsTeamMemberBefore = (imgUrl: string | undefined) => {
 };
 
 const vipBorderImage = css`
-  border-image-source: linear-gradient(90deg, var(--yellow) 0%, var(--vip) 100%);
+  border-image-source: linear-gradient(90deg, var(--green) 0%, var(--vip) 100%);
 `;
 
 const modBorderImage = css`
-  border-image-source: linear-gradient(90deg, var(--yellow) 0%, var(--mod) 100%);
-`;
-
-const myFavoriteStreamerBorderImage = css`
-  border-image-source: linear-gradient(90deg, var(--bbb-pink) 0%, var(--bbb-blue) 100%);
+  border-image-source: linear-gradient(90deg, var(--green) 0%, var(--mod) 100%);
 `;
 
 const broadcasterBorderImage = css`
-  border-image-source: linear-gradient(90deg, var(--yellow) 0%, var(--broadcaster) 100%);
+  border-image-source: linear-gradient(90deg, var(--green) 0%, var(--broadcaster) 100%);
 `;
 
 const ChatMessage = styled.div<ChatMessageProps>`
@@ -100,44 +94,32 @@ const ChatMessage = styled.div<ChatMessageProps>`
   margin-bottom: 0.5rem;
   border-top: 6px solid;
   border-image-slice: 1;
-  border-image-source: linear-gradient(90deg, var(--yellow) 0%, var(--yellow) 100%);
+  border-image-source: linear-gradient(90deg, var(--green) 0%, var(--green) 100%);
   box-shadow: 0rem 0.6rem 1rem -0.4rem var(--black);
   border-bottom-right-radius: 0.25rem;
   position: relative;
   overflow: hidden;
 
-  &:after {
-    ${(props) => (props.isSubscriber ? renderSubscriberAfter : '')}
-    ${(props) => (props.isBroadcaster ? renderBroadcasterAfter : '')}
-  }
-
   ${(props) => (props.isVip ? vipBorderImage : '')};
   ${(props) => (props.isMod ? modBorderImage : '')};
-  ${(props) => (props.isMyFavoriteStreamer ? myFavoriteStreamerBorderImage : '')};
   ${(props) => (props.isBroadcaster ? broadcasterBorderImage : '')};
   ${(props) => (props.isTeamMember ? renderIsTeamMemberBefore(props.teamMemberIconUrl) : '')}
 `;
 
 const vipLinearGradient = css`
-  background: linear-gradient(90deg, var(--yellow), var(--vip));
+  background: linear-gradient(90deg, var(--green), var(--vip));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 `;
 
 const modLinearGradient = css`
-  background: linear-gradient(90deg, var(--yellow), var(--mod));
+  background: linear-gradient(90deg, var(--green), var(--mod));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 `;
 
 const broadcasterLinearGradient = css`
-  background: linear-gradient(90deg, var(--yellow), var(--broadcaster));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-`;
-
-const myFavoriteStreamerLinearGradient = css`
-  background: linear-gradient(90deg, var(--bbb-pink), var(--bbb-blue));
+  background: linear-gradient(90deg, var(--green), var(--broadcaster));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 `;
@@ -146,17 +128,16 @@ const DisplayName = styled.p<ChatMessageProps>`
   color: var(--white);
   font-size: 1rem;
   margin-bottom: 1rem;
-  color: var(--yellow);
+  color: var(--green);
   font-weight: var(--font-weight-bold);
 
   ${(props) => (props.isVip ? vipLinearGradient : '')};
   ${(props) => (props.isMod ? modLinearGradient : '')};
-  ${(props) => (props.isMyFavoriteStreamer ? myFavoriteStreamerLinearGradient : '')};
   ${(props) => (props.isBroadcaster ? broadcasterLinearGradient : '')};
 `;
 
 const MessageActionStyles = css`
-  color: var(--yellow) !important;
+  color: var(--green) !important;
   font-style: italic;
 `;
 

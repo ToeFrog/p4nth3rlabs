@@ -2,17 +2,17 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
 export const WebcamPosProps = {
-  pantherOffset: -56,
-  pantherAdjust: 18,
+  frogOffset: -56,
+  frogAdjust: 18,
   height: 956,
   width: 1700,
   borderWidth: 24,
 };
 
-const Panther = styled(motion.img)`
+const Frog = styled(motion.img)`
   position: absolute;
-  left: ${WebcamPosProps.pantherOffset}px;
-  bottom: ${WebcamPosProps.pantherOffset}px;
+  left: ${WebcamPosProps.frogOffset}px;
+  bottom: ${WebcamPosProps.frogOffset}px;
 `;
 
 const WebcamContainer = styled.div`
@@ -39,4 +39,4 @@ const WebcamFrame = styled.div`
   border-image-source: linear-gradient(45deg, var(--yellow) 0%, var(--vip) 100%);
 `;
 
-export { WebcamContainer, WebcamFrame, Panther };
+export { WebcamContainer, WebcamFrame, Frog };

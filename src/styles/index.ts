@@ -4,28 +4,24 @@ const GlobalStyle = createGlobalStyle`
   :root {
     --cb-animation: cubic-bezier(.51,.56,.11,1.03);
     --alert-display-time: 3900ms;
-    --red: #f11012;
-    --red-darker: #d90d10;
-    --green: #82af3a;
-    --black: #0f111a;
+    --red: #b53d1f;
+    --green: #7ab51f;
+    --black: #000000;
     --white: #ffffff;
     --offwhite: #f8f8f2;
-    --yellow: #ffb626;
+    --brown: #5c4d36;
 
-    --bbb-pink: #FF00FF;
-    --bbb-blue: #00FFFF;
-
-    --mod: #13a133;
-    --vip: #d91ca8;
-    --broadcaster: #e20f1f;
+    --mod: #b53d1f; 
+    --vip: #5b1fb5;
+    --broadcaster: #7ab51f;
 
     --grid-unit: 0.5rem;
 
     --font-weight-normal: 400;
     --font-weight-bold: 700;
 
-    --font-family-heading: 'Ribeye Marrow', cursive;
-    --font-family-main: 'Titillium Web', sans-serif;
+    --font-family-heading: "Arial Rounded MT Bold", "Helvetica Rounded", Arial, sans-serif;
+    --font-family-main: "Arial Rounded MT Bold", "Helvetica Rounded", Arial, sans-serif;
 
     --global-transition-time: 0.2s;
   }

@@ -24,7 +24,6 @@ export default function Message(props: MessageProps) {
     isSubscriber,
     isBroadcaster,
     isTeamMember,
-    isMyFavoriteStreamer,
     teamMemberIconUrl,
   } = message;
 
@@ -41,7 +40,6 @@ export default function Message(props: MessageProps) {
       isVip={isVip}
       isMod={isMod}
       isTeamMember={isTeamMember}
-      isMyFavoriteStreamer={isMyFavoriteStreamer}
       teamMemberIconUrl={teamMemberIconUrl ?? ""}
     >
       <AvatarContainer backgroundImage={logoUrl} />
@@ -53,7 +51,6 @@ export default function Message(props: MessageProps) {
           isVip={isVip}
           isMod={isMod}
           isTeamMember={isTeamMember}
-          isMyFavoriteStreamer={isMyFavoriteStreamer}
           teamMemberIconUrl={teamMemberIconUrl ?? ""}
         >
           @{displayName}
